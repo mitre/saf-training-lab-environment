@@ -1,4 +1,4 @@
-# inspec-assessor-course-lab-environment
+# saf-training-lab-environment
 
 The InSpec Assessor Lab is a GitHub Codespaces environment that makes it quick and easy for you to start learning and working on executing your own InSpec profiles.
 
