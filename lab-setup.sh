@@ -1,6 +1,6 @@
 #! /bin/bash
 
-alias lab="cd /workspaces/inspec-assessor-course-lab-environment"
+alias lab="cd /workspaces/saf-training-lab-environment"
 sudo apt-get install -y tree
 if ! command -v inspec &> /dev/null
 then
