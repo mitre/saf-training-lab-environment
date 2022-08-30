@@ -1,0 +1,15 @@
+version: '3'
+services:
+  workstation:
+    container_name: workstation
+    image: learnchef/inspec_workstation
+    stdin_open: true
+    tty: true
+    links:
+      - target
+    volumes:
+      - .:/root
+  target:
+    image: learnchef/inspec_target
+    stdin_open: true
+    tty: true
