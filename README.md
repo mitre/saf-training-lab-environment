@@ -21,11 +21,12 @@ The Codespece is setup to be very low overhead, we use the base 'Codespace Linux
 ## Using the Lab
 
 To use the lab:
-1. Fork the repository into your GitHub Account
-2. Click the 'Code' Drop down and select, 'Configure and Create Codespace'
-3. Select 'Configure and Create Codespace', we suggest the larger instance with greater memory, at least 64G.
-4. Wait for your Codespace instance to start and finish its startup scripts.
-5. We will then install three extentions - Click the 'L' shaped box on the left-hand bar. Search and install these three extentions.
+1. Make sure you've signed in to your GitHub Account
+2. Click the 'Use this template' dropdown and select 'Create a new repository'
+3. Check to make sure your username is the owner of the new repository and enter a name for your repository 
+4. Click the 'Create repository' button at the bottom 
+5. Wait for your repository to opne up, then click the 'Code' Drop down 
+6. We will then install three extentions - Click the extensions box on the left-hand bar. Search and install these three extentions:
  - Ruby
  - Docker
  - Prettier
