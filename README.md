@@ -62,6 +62,9 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS    
 Previously, the SAF Training courses utilized GitHub Codespaces as a way for users to learn and work on executing InSpec profiles. GitHub has updated their policy so that Codespaces can be used for a certain amount of time before the user gets billed. You can read more about it here: 
 - https://docs.github.com/en/codespaces/overview#using-github-codespaces
 
+Adiitionally, all active Codespaces can be found here:
+- https://github.com/codespaces
+
 ***Docker Container Restart May be Needed*** 
 
 You may have to restart your docker containers again after you restart your Codespace. To do this:
