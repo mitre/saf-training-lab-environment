@@ -55,36 +55,12 @@ Docker is running the container(s):
 CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS         PORTS                NAMES
 4f0ceb9b5974   nginx:latest   "/docker-entrypoint.…"   2 months ago   Up 6 minutes   0.0.0.0:80->80/tcp   nginx
 ```
-## Stopping / Pausing and Restarting your Codespace
+## Codespaces
 
-### Stoping/Pausing your Codespace
+### Note:
 
-You are able to `stop` or `pause` your codespacce in a couple of ways. The easiest way, is to go to the Codespaces page while you are signed into your GitHub account:
-
-- <https://github.com/codespaces>
-
-This will list all your Codespaces and let you stop and start them as needed.
-
-1. Click on the `...`
-2. Select `Stop Codespace`
-3. Your Codespace should now be `stopped`
-
-It also makes it easily to `pause` your work so that you don't use resources or risk an error and have lost work.
-
-#### Closing the Browser Window
-
-If you just close your window, your Codespace will automatically `pause` itself after a few min of inactivity. However, this is not quite as stable as following the recomended workflow above, but if you do close your browser by accident, it should be fine.
-
-### Restarting your Codespace
-
-On your return you can go back to:
-
-- <https://github.com/codespaces>
-
-You will see your Codoespace listed in the table. 
-
-1. Click on the `...` on the right, and select one of the startup options.
-2. This will restart your Codespace where you left it.
+Previously, the SAF Training courses utilized GitHub Codespaces as a way for users to learn and work on executing InSpec profiles. GitHub has updated their policy so that Codespaces can be used for a certain amount of time before the user gets billed. You can read more about it here: 
+- https://docs.github.com/en/codespaces/overview#using-github-codespaces
 
 ***Docker Container Restart May be Needed*** 
 
@@ -96,9 +72,9 @@ You may have to restart your docker containers again after you restart your Code
 
 ## Adding Services and Software to your Codespace
 
-Your Codespace is yours to command, you have full `sudo` access and can install any software or services you like, run databases, web-servers, etc. and expose any ports that you might need to do your work.
+Your repository is yours to command, you have full `sudo` access and can install any software or services you like, run databases, web-servers, etc. and expose any ports that you might need to do your work.
 
-## Createing a Pull Request
+## Creating a Pull Request
 
 - <https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github>
 
