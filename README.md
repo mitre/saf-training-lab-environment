@@ -1,11 +1,11 @@
 # saf-training-lab-environment
 
-The InSpec Assessor Lab is a GitHub Codespaces environment that makes it quick and easy for you to start learning and working on executing your own InSpec profiles.
+The InSpec Assessor Lab is a GitHub environment that makes it quick and easy for you to start learning and working on executing your own InSpec profiles.
 
-It is also a great quick and easy way to test and demonstrate what you have learned or collaborate with others to get help with what you are working on.
+It is also a great, quick, and easy way to test and demonstrate what you have learned or collaborate with others to get help with what you are working on.
 ## Overview of the Lab
 
-The Codespece is setup to be very low overhead, we use the base 'Codespace Linux Community Image' along with a simple `setup.sh` script to quickly add the tools you need to get started easily along with two containers to act as testing targets.
+The repository is setup to be very low overhead, we use a simple `setup.sh` script to quickly add the tools you need to get started easily, along with two containers to act as testing targets.
 ### Lab Components
 
 - CodeSpaces Linux Base Community Image
@@ -25,8 +25,8 @@ To use the lab:
 2. Click the 'Use this template' dropdown and select 'Create a new repository'
 3. Check to make sure your username is the owner of the new repository and enter a name for your repository 
 4. Click the 'Create repository' button at the bottom 
-5. Wait for your repository to opne up, then click the 'Code' Drop down 
-6. We will then install three extentions - Click the extensions box on the left-hand bar. Search and install these three extentions:
+5. Wait for your repository to open up, then click the 'Code' Drop down 
+6. We will then install three extensions - Click the extensions box on the left-hand bar. Search and install these three extensions:
  - Ruby
  - Docker
  - Prettier
@@ -67,13 +67,13 @@ Additionally, all active Codespaces can be found here:
 
 ***Docker Container Restart May be Needed*** 
 
-Occasionally you may have to restart your docker containers again. To do this:
+Occasionally, you may have to restart your Docker containers again. To do this:
 
 1. Run: `docker ps`
 2. If your containers are not running, then just run: `lab-setup.sh`
 3. Run: `docker ps` again to verify that your containers are again running in your environment.
 
-## Adding Services and Software to your Codespace
+## Adding Services and Software
 
 Your repository is yours to command, you have full `sudo` access and can install any software or services you like, run databases, web-servers, etc. and expose any ports that you might need to do your work.
 
