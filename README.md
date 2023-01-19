@@ -22,21 +22,47 @@ The repository is setup to be very low overhead, we use a simple `setup.sh` scri
 
 To use the lab:
 1. Make sure you've signed in to your GitHub Account
-2. Click the 'Use this template' dropdown and select 'Create a new repository'
-3. Check to make sure your username is the owner of the new repository and enter a name for your repository 
-4. Click the 'Create repository' button at the bottom 
-5. Wait for your repository to open up, then click the 'Code' Drop down 
-6. We will then install three extensions - Click the extensions box on the left-hand bar. Search and install these three extensions:
+2. On the [SAF Training repo](https://github.com/mitre/saf-training-lab-environment/tree/main), click the green 'Use this template' dropdown button and select 'Create a new repository'
+
+![green button with the words 'use this template' in white text](https://user-images.githubusercontent.com/79539195/213498628-934c3343-4b9a-4488-9295-d21840e766f6.png)
+
+![green dropdown with 2 options, the first one says 'create a new repository' and is highlighted with a red box. the second option says 'open in a codespace'](https://user-images.githubusercontent.com/79539195/213499867-0a2bbff2-9593-443d-a8c5-dd9170ddca9e.png)
+
+
+3. Check to make sure your username is the owner of the new repository and enter a name for your repository. We recommend to name it `saf-training-lab-environment` for ease. Additionally, feel free to make your repository public, if it isn't already.
+
+4. Click the 'Create repository from template' button at the bottom 
+![green button that says 'create repository from template'](https://user-images.githubusercontent.com/79539195/213503629-13ecb85b-c173-4f8b-ba1b-be6cd194a9f7.png)
+- if the button is greyed out, check to make sure you've selected your username as the owner, and named the repository.
+
+5. Wait for your repository to open up, then click the 'Code' drop down button
+![green button that says 'code'](https://user-images.githubusercontent.com/79539195/213504430-e0417daf-e1e9-40b2-9c82-541a7f766ced.png) 
+
+6. After clicking the 'Code' button, a drop down menu should display, with a 'Local' and a 'Codespace' option. Select the 'Codespace' tab, then click the button that says 'Create codespace on main' 
+- Note: please make sure to read the [Codespace section](https://user-images.githubusercontent.com/79539195/213515712-df955766-cf5e-4156-a745-36288c1e6bb1.png) of this README, as GitHub has updated their policy about Codespaces.
+![codespaces menu](https://user-images.githubusercontent.com/79539195/213504777-b74cf75a-6dec-4a39-8c52-a5ff4a8b07c3.png)
+
+7. A new tab in your browser should open up with your Codespace. It should open up the README.md file, with a terminal at the bottom. 
+![view of codespace when it first opens up](https://user-images.githubusercontent.com/79539195/213515461-4c13b23a-1cd1-4e92-9d7b-3128a583d09a.png)
+
+8. We will then install three extensions - Click the extensions box on the left-hand bar.
+
+![image of extensions button in github codespaces](https://user-images.githubusercontent.com/79539195/213515712-df955766-cf5e-4156-a745-36288c1e6bb1.png)
+Search and install these three extensions:
  - Ruby
  - Docker
  - Prettier
-7. In the terminal, run the `lab-setup.sh` script
+
+10. In the terminal, run the `lab-setup.sh` script
 
 ```sh
 source ./lab-setup.sh
 ```
 
-Once, this has finished, you should have InSpec installed in your environment, the MITRE SAF CLI and two running docker containers - tagged as `nginx` and `redhat8`.
+Once this has finished, your terminal should display something like this, right before your username and the path to your codespace.
+![image of terminal after running the lab-setup command](https://user-images.githubusercontent.com/79539195/213518549-79a83522-4bcc-412c-9178-7130b1bae4e5.png)
+
+You should have InSpec installed in your environment, the MITRE SAF CLI and two running docker containers - tagged as `nginx` and `redhat8`.
 
 8. Once complete, you can verify the setup in your environment with the `verify-lab.sh` script:
 
@@ -55,7 +81,10 @@ Docker is running the container(s):
 CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS         PORTS                NAMES
 4f0ceb9b5974   nginx:latest   "/docker-entrypoint.…"   2 months ago   Up 6 minutes   0.0.0.0:80->80/tcp   nginx
 ```
-## Codespaces
+
+![screenshot of terminal after running the verify-lab command](https://user-images.githubusercontent.com/79539195/213518892-a50e0044-f1ae-43bb-bbf4-5a48af3ccb5e.png)
+
+## Codespaces // ADD THE 120 V. 60 HOURS THING THAT WAS DISCUSSED W EMILY
 
 ### Note:
 
