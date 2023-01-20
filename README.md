@@ -39,7 +39,7 @@ To use the lab:
 ![green button that says 'code'](https://user-images.githubusercontent.com/79539195/213504430-e0417daf-e1e9-40b2-9c82-541a7f766ced.png) 
 
 6. After clicking the 'Code' button, a drop down menu should display, with a 'Local' and a 'Codespace' option. Select the 'Codespace' tab, then click the button that says 'Create codespace on main' 
-- Note: please make sure to read the [Codespace section](https://user-images.githubusercontent.com/79539195/213515712-df955766-cf5e-4156-a745-36288c1e6bb1.png) of this README, as GitHub has updated their policy about Codespaces.
+- Note: please make sure to read the [Codespace section](https://github.com/mitre/saf-training-lab-environment/blob/updates/README.md#note) of this README, as GitHub has updated their policy about Codespaces.
 ![codespaces menu](https://user-images.githubusercontent.com/79539195/213504777-b74cf75a-6dec-4a39-8c52-a5ff4a8b07c3.png)
 
 7. A new tab in your browser should open up with your Codespace. It should open up the README.md file, with a terminal at the bottom. 
@@ -84,15 +84,18 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS    
 
 ![screenshot of terminal after running the verify-lab command](https://user-images.githubusercontent.com/79539195/213518892-a50e0044-f1ae-43bb-bbf4-5a48af3ccb5e.png)
 
-## Codespaces // ADD THE 120 V. 60 HOURS THING THAT WAS DISCUSSED W EMILY
+## Codespaces
 
 ### Note:
 
-Previously, the SAF Training courses utilized GitHub Codespaces as a way for users to learn and work on executing InSpec profiles. GitHub has updated their policy so that Codespaces can be used for a certain amount of time before the user gets billed. You can read more about it here: 
+Previously, the SAF Training courses utilized GitHub Codespaces as a way for users to learn and work on executing InSpec profiles. GitHub has updated their policy so that Codespaces can be used for a certain amount of time before the user gets billed. If you have a free GitHub account, you're given 120 core hours per month. This means that if you use a 2-core machine, and your codespace runs for 8 hours, you've used up 16 (2 mulitplied by 8 = 16) core hours out of the 120. You can read more about it here: 
 - https://docs.github.com/en/codespaces/overview#using-github-codespaces
 
 Additionally, all active Codespaces can be found here:
 - https://github.com/codespaces
+
+From the above link, you can access all of your codespaces, and stop the codespace as well.
+![image of codespace options](https://user-images.githubusercontent.com/79539195/213740523-639e2dd0-763b-47b8-b038-97195f32c04d.png)
 
 ***Docker Container Restart May be Needed*** 
 
