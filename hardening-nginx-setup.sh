@@ -24,8 +24,8 @@ docker exec nginx ls /usr/bin | grep python3
 echo -e "${VERB}Installing Ansible.${RSET}"
 python3 -m pip install --user ansible
 
-echo "${LINE_ASCII_CONSOLE}"
 
+echo "${LINE_ASCII_CONSOLE}"
 
 echo -e "${VERB}Cloning the \"docker\" branch of the NGINX Ansible hardening script.${RSET}"
 git clone --branch docker https://github.com/mitre/ansible-nginx-stigready-hardening.git || true
