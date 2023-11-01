@@ -6,20 +6,20 @@ alias lab="cd ${CODESPACE_VSCODE_FOLDER}"
 
 echo "${LINE_ASCII_CONSOLE}"
 
-echo -e "${VERB}Installing Code extensions.${RSET}"
+echo -e "${VERB}Installing Code extensions.${RSET}\n"
 
 code --install-extension shopify.ruby-lsp
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension esbenp.prettier-vscode
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Installing the \"tree\" utility.${RSET}"
 sudo apt-get install -y tree
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! command -v inspec &> /dev/null
 then
@@ -30,14 +30,14 @@ else
 fi
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Installing the \"rubocop\" Ruby gem.${RSET}"
 
 gem install rubocop
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! command -v saf &> /dev/null
 then
@@ -49,13 +49,13 @@ else
 fi
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Setting up the required Docker containers.${RSET}"
 
 docker-compose -f docker-compose.yml up -d
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
-echo -e "${HIGH}Setup complete.${RSET}"
+echo -e "${HIGH}Setup complete.${RSET}\n"
