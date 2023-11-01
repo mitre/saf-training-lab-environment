@@ -37,7 +37,7 @@ echo -e "${VERB}Making the NGINX Ansible hardening script directory the current 
 COMMAND='cd ./ansible-nginx-stigready-hardening'
 if [[ ! $0 =~ .*/bash ]]
 then
-    echo -e "${WARN}If you did not execute this script as${RSET} ${VERB}source $0${RSET} ${WARN}then you must manually execute the${RSET} ${VERB}${COMMAND}${RSET} ${WARN}command.${REST}" 
+    echo -e "${WARN}If you did not run this script by executing${RSET} ${VERB}source $0${RSET} ${WARN}or${RSET} ${VERB}. $0${RSET} ${WARN}then you must manually execute the${RSET} ${VERB}${COMMAND}${RSET} ${WARN}command.${REST}" 
 fi
 ${COMMAND}
 unset COMMAND
