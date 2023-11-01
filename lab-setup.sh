@@ -58,4 +58,5 @@ docker-compose -f docker-compose.yml up -d
 
 echo "${LINE_ASCII_CONSOLE}"
 
-echo 'Setup complete.'
+echo -e "${INFO}Setup complete.${RSET}"
+
