@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./prettyOutput.sh
+source ./set-prettyOutputVariables.sh
 alias lab="cd ${CODESPACE_VSCODE_FOLDER}"
 
 
