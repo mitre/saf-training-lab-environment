@@ -4,7 +4,7 @@ source ./prettyOutput.sh
 alias lab="cd ${CODESPACE_VSCODE_FOLDER}"
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Installing Code extensions.${RSET}\n"
 
