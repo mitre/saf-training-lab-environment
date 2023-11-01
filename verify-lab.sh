@@ -31,4 +31,4 @@ echo -e "${INFO}* Docker is running the container(s):${RSET}\n${PASS}${container
 
 echo "${LINE_ASCII_CONSOLE}"
 
-echo 'Verification complete.'
+echo -e "${INFO}Verification complete.${RSET}"
