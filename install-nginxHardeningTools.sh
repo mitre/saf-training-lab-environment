@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./prettyOutput.sh
+source ./set-prettyOutputVariables.sh
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
