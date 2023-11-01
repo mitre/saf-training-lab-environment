@@ -1,27 +1,42 @@
 #!/bin/bash
 
-echo 'Setting up the NGINX hardening environment...'
+source ./prettyOutput.sh
+
+
+echo "${LINE_ASCII_CONSOLE}"
+
+echo -e "${VERB}Setting up the NGINX hardening environment...${RSET}"
+
 cd "$CODESPACE_VSCODE_FOLDER"
 
-echo 'Ensuring that the contents of the "nginx" container is up-to-date.'
+
+echo "${LINE_ASCII_CONSOLE}"
+
+echo -e "${VERB}Ensuring that the contents of the \"nginx\" container is up-to-date.${RSET}"
 docker exec nginx apt-get update
 
-echo 'Installing Python 3 in the "nginx" container.'
+echo -e "${VERB}Installing Python 3 in the \"nginx\" container.${RSET}"
 docker exec nginx apt-get install -y python3
 
-echo 'Verifying that Python 3 was installed in the "nginx" container.'
+echo -e "${VERB}Verifying that Python 3 was installed in the \"nginx\" container.${RSET}"
 docker exec nginx ls /usr/bin | grep python3
 
-echo 'Installing Ansible.'
+echo -e "${VERB}Installing Ansible.${RSET}"
 python3 -m pip install --user ansible
 
-echo 'Cloning the "docker" branch of the NGINX Ansible hardening script.'
+echo "${LINE_ASCII_CONSOLE}"
+
+
+echo -e "${VERB}Cloning the \"docker\" branch of the NGINX Ansible hardening script.${RSET}"
 git clone --branch docker https://github.com/mitre/ansible-nginx-stigready-hardening.git || true
 
-echo 'Fixing permissions on the NGINX Ansible hardening script directory.'
+echo -e "${VERB}Fixing permissions on the NGINX Ansible hardening script directory.${RSET}"
 chmod 755 ansible-nginx-stigready-hardening
 
-echo 'Making the NGINX Ansible hardening script directory the current working directory.'
+echo -e "${VERB}Making the NGINX Ansible hardening script directory the current working directory.${RSET}"
 cd ./ansible-nginx-stigready-hardening
 
-echo 'Setup complete.'
+
+echo "${LINE_ASCII_CONSOLE}"
+
+echo -e "${INFO}Setup complete.${RSET}"
