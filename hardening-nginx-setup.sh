@@ -42,6 +42,7 @@ fi
 ${COMMAND}
 unset COMMAND
 
+
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${HIGH}Setup complete.${RSET}\n"
