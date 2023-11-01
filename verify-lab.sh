@@ -24,11 +24,11 @@ versionSafe=$(saf --version 2> /dev/null)
 versionInspec=$(inspec --version 2> /dev/null)
 containersRunning=$(docker ps)
 
-echo -e "${INFO}* MITRE SAF Version:${RSET} ${PASS}${versionSafe}${RSET}"
-echo -e "${INFO}* InSpec Version:${RSET} ${PASS}${versionInspec}${RSET}"
-echo -e "${INFO}* Docker is running the container(s):${RSET}\n${PASS}${containersRunning}${RSET}"
+echo -e "${HIGH}* MITRE SAF Version:${RSET} ${PASS}${versionSafe}${RSET}"
+echo -e "${HIGH}* InSpec Version:${RSET} ${PASS}${versionInspec}${RSET}"
+echo -e "${HIGH}* Docker is running the container(s):${RSET}\n${PASS}${containersRunning}${RSET}"
 
 
 echo "${LINE_ASCII_CONSOLE}"
 
-echo -e "${INFO}Verification complete.${RSET}"
+echo -e "${HIGH}Verification complete.${RSET}"
