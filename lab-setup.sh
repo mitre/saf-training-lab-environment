@@ -1,5 +1,10 @@
 #! /bin/bash
 
+echo "Installing Code extensions"
+code --install-extension shopify.ruby-lsp
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension esbenp.prettier-vscode
+
 alias lab="cd /workspaces/saf-training-lab-environment"
 sudo apt-get install -y tree
 if ! command -v inspec &> /dev/null
