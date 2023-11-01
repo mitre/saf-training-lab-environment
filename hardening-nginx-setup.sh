@@ -10,7 +10,7 @@ echo -e "${VERB}Setting up the NGINX hardening environment...${RSET}"
 cd "$CODESPACE_VSCODE_FOLDER"
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Ensuring that the contents of the \"nginx\" container is up-to-date.${RSET}"
 docker exec nginx apt-get update
@@ -25,7 +25,7 @@ echo -e "${VERB}Installing Ansible.${RSET}"
 python3 -m pip install --user ansible
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Cloning the \"docker\" branch of the NGINX Ansible hardening script.${RSET}"
 git clone --branch docker https://github.com/mitre/ansible-nginx-stigready-hardening.git || true
@@ -37,6 +37,6 @@ echo -e "${VERB}Making the NGINX Ansible hardening script directory the current 
 cd ./ansible-nginx-stigready-hardening
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
-echo -e "${HIGH}Setup complete.${RSET}"
+echo -e "${HIGH}Setup complete.${RSET}\n"
