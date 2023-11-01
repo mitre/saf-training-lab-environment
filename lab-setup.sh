@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 source ./prettyOutput.sh
 alias lab="cd ${CODESPACE_VSCODE_FOLDER}"
