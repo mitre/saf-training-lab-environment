@@ -65,11 +65,11 @@ To use the lab:
     source ./build-lab.sh
     ```
 
-    Once this has finished, your terminal should display something like this, right before your username and the path to your codespace.
+    Once the script finishes your terminal should display something like the following, right before your username and the path to your codespace:
 
     ![image of terminal after running the lab-setup command](https://user-images.githubusercontent.com/79539195/213518549-79a83522-4bcc-412c-9178-7130b1bae4e5.png)
 
-    You should have InSpec installed in your environment, the MITRE SAF CLI and two running docker containers - tagged as `nginx` and `redhat8`.
+    Your environment should have the MITRE SAF CLI installed as `saf`, InSpec installed as `inspec`, and two running docker containers tagged as 'nginx' and 'redhat8'.
 
 09. Once complete, you can verify the setup in your environment with the `test-lab.sh` script:
 
@@ -77,7 +77,7 @@ To use the lab:
     ./test-lab.sh
     ```
 
-    Which should return something like:
+    Which should return something like the following:
 
     ```sh
     _______________________________________________________________________________________________________________
