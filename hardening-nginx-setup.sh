@@ -3,7 +3,7 @@
 source ./prettyOutput.sh
 
 
-echo "${LINE_ASCII_CONSOLE}"
+echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Setting up the NGINX hardening environment...${RSET}"
 
