@@ -26,7 +26,7 @@ then
   echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
   curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec 
 else
-  echo -e "${INFO}InSpec is already installed.${RSET}"
+  echo -e "${HIGH}InSpec is already installed.${RSET}"
 fi
 
 
@@ -45,7 +45,7 @@ then
   npm install -g npm
   npm install -g @mitre/saf 
 else
-  echo -e "${INFO}MITRE SAF CLI is already installed.${RSET}"
+  echo -e "${HIGH}MITRE SAF CLI is already installed.${RSET}"
 fi
 
 
@@ -58,5 +58,4 @@ docker-compose -f docker-compose.yml up -d
 
 echo "${LINE_ASCII_CONSOLE}"
 
-echo -e "${INFO}Setup complete.${RSET}"
-
+echo -e "${HIGH}Setup complete.${RSET}"
