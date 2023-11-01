@@ -30,4 +30,4 @@ echo -e "${HIGH}* Docker is running the following container(s):${RSET}\n${PASS}$
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
-echo -e "${HIGH}Verification complete.${RSET}"
+echo -e "${HIGH}Verification complete.${RSET}\n"
