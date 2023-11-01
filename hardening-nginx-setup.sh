@@ -34,8 +34,13 @@ echo -e "${VERB}Fixing permissions on the NGINX Ansible hardening script directo
 chmod 755 ansible-nginx-stigready-hardening
 
 echo -e "${VERB}Making the NGINX Ansible hardening script directory the current working directory.${RSET}"
-cd ./ansible-nginx-stigready-hardening
-
+COMMAND='cd ./ansible-nginx-stigready-hardening'
+if [[ ! $0 =~ .*/bash ]]
+then
+    echo -e "${WARN}If you did not execute this script as${RSET} ${VERB}source $0${RSET} ${WARN}then you must manually execute the${RSET} ${VERB}${COMMAND}${RSET} ${WARN}command.${REST}" 
+fi
+${COMMAND}
+unset COMMAND
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
