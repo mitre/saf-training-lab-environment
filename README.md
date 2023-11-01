@@ -127,7 +127,7 @@ From the above link, you can access all of your codespaces, and stop the codespa
 
 ***Docker Container Restart May be Needed*** 
 
-Occasionally, you may have to restart your Docker containers. To do this:
+Occasionally, you may have to restart your Docker containers:
 
 1. Run: `docker ps`
 2. If your containers are not running, then just run: `build-lab.sh`
@@ -145,7 +145,7 @@ Go for it and if for some reason you break your environment, just start a new on
 
 ### NOTICE
 
-© 2018-2022 The MITRE Corporation.
+© 2018-2023 The MITRE Corporation.
 
 Approved for Public Release; Distribution Unlimited. Case Number 18-3678.
 
