@@ -39,4 +39,4 @@ cd ./ansible-nginx-stigready-hardening
 
 echo "${LINE_ASCII_CONSOLE}"
 
-echo -e "${INFO}Setup complete.${RSET}"
+echo -e "${HIGH}Setup complete.${RSET}"
