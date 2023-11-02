@@ -1,6 +1,11 @@
 #!/bin/bash
 
+# WARNING
+#
+# This script is not meant to be run directly.
+#
 # Source this file in other scripts to utilize these variables.
+
 
 # Get the width and height of the current virtual terminal window.
 TERMINAL_ROWS=$(stty size | cut --delimiter=' ' --fields=1)

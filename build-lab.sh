@@ -1,6 +1,12 @@
 #!/bin/bash
 
 source ./set-prettyOutputVariables.sh
+
+
+echo -e "${LINE_ASCII_CONSOLE}\n"
+
+echo -e "${VERB}Setting up the lab environment...${RSET}"
+
 alias lab="cd ${CODESPACE_VSCODE_FOLDER}"
 
 
@@ -43,7 +49,7 @@ if ! command -v saf &> /dev/null
 then
   echo -e "${VERB}Installing MITRE SAF CLI into the Environment.${RSET}"
   npm install -g npm
-  npm install -g @mitre/saf 
+  npm install -g @mitre/saf
 else
   echo -e "${HIGH}MITRE SAF CLI is already installed.${RSET}"
 fi

@@ -19,10 +19,13 @@ echo -e "${VERB}Installing Python 3 in the \"nginx\" container.${RSET}"
 docker exec nginx apt-get install -y python3
 
 echo -e "${VERB}Verifying that Python 3 was installed in the \"nginx\" container.${RSET}"
-docker exec nginx ls /usr/bin | grep python3
+docker exec nginx ls -al /usr/bin/python3*
 
 echo -e "${VERB}Installing Ansible.${RSET}"
 python3 -m pip install --user ansible
+
+echo -e "${VERB}Verifying that Ansible was installed in the \"nginx\" container.${RSET}"
+docker exec nginx ls -al /usr/bin/ansible*
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"

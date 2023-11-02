@@ -23,28 +23,34 @@ versionSaf=$(saf --version 2> /dev/null)
 versionInspec=$(inspec --version 2> /dev/null)
 containersRunning=$(docker ps)
 containersMissing=''
+verificationSuccessful=true
+
 
 if [ -z "${versionSaf}" ]
 then
-    statusSaf="${FAIL}\"saf\" not installed${RSET}"
+    verificationSuccessful=false
+    statusSaf="${FAIL}\"saf\" is not installed.${RSET}"
 else
     statusSaf="${PASS}${versionSaf}${RSET}"
 fi
 
 if [ -z "${versionInspec}" ]
 then
-    statusInspec="${FAIL}\"inspec\" not installed${RSET}"
+    verificationSuccessful=false
+    statusInspec="${FAIL}\"inspec\" is not installed.${RSET}"
 else
     statusInspec="${PASS}${versionInspec}${RSET}"
 fi
 
 if ! echo "${containersRunning}" | grep --silent --extended-regexp 'nginx'
 then
-   containersMissing="${containersMissing}The \"nginx\" container is missing.\n"
+    verificationSuccessful=false
+    containersMissing="${containersMissing}The \"nginx\" container is missing.\n"
 fi
 if ! echo "${containersRunning}" | grep --silent --extended-regexp 'redhat8'
 then
-   containersMissing="${containersMissing}The \"redhat8\" container is missing.\n"
+    verificationSuccessful=false
+    containersMissing="${containersMissing}The \"redhat8\" container is missing.\n"
 fi
 
 echo -e "${HIGH}* MITRE SAF Version:${RSET} ${statusSaf}"
@@ -59,4 +65,9 @@ echo -e "${FAIL}${containersMissing}${RSET}"
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
-echo -e "${HIGH}Verification complete.${RSET}\n"
+if $verificationSuccessful
+then
+    echo -e "${PASS}All verification tests completed successfully.${RSET}\n"
+else
+    echo -e "${FAIL}One or more verification tests FAILED.${RSET}\n"
+fi
