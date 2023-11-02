@@ -7,7 +7,7 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Setting up the NGINX hardening environment...${RSET}"
 
-cd "$CODESPACE_VSCODE_FOLDER"
+cd "/workspaces/$(basename $GITHUB_REPOSITORY)"
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"

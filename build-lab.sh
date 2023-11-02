@@ -7,7 +7,7 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Setting up the lab environment...${RSET}"
 
-alias lab="cd ${CODESPACE_VSCODE_FOLDER}"
+alias lab="cd /workspaces/$(basename $GITHUB_REPOSITORY)"
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
