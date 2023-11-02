@@ -19,13 +19,23 @@ echo -e "${VERB}Installing Python 3 in the \"nginx\" container.${RSET}"
 docker exec nginx apt-get install -y python3
 
 echo -e "${VERB}Verifying that Python 3 was installed in the \"nginx\" container.${RSET}"
-docker exec nginx ls -al /usr/bin/python3*
+if docker exec nginx which python3
+then
+    docker exec nginx ls -al $(docker exec nginx which python3)
+else
+    echo -e "${FAIL}Python 3 does not seem to be installed in the \"nginx\" container.${RSET}"
+fi
 
 echo -e "${VERB}Installing Ansible.${RSET}"
 python3 -m pip install --user ansible
 
-echo -e "${VERB}Verifying that Ansible was installed in the \"nginx\" container.${RSET}"
-docker exec nginx ls -al /usr/bin/ansible*
+echo -e "${VERB}Verifying that Ansible was installed.${RSET}"
+if which ansible
+then
+    ls -al $(which ansible)
+else
+    echo -e "${FAIL}Ansible does not seem to be installed.${RSET}"
+fi
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
