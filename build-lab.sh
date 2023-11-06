@@ -29,29 +29,33 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! command -v inspec &> /dev/null
 then
-  echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
-  curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec 
+    echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
+    curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec 
 else
-  echo -e "${HIGH}InSpec is already installed.${RSET}"
+    echo -e "${HIGH}InSpec is already installed.${RSET}"
 fi
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
-echo -e "${VERB}Installing the \"rubocop\" Ruby gem.${RSET}"
-
-gem install rubocop
+if ! gem list --installed rubocop &> /dev/null
+then
+  echo -e "${VERB}Installing the \"rubocop\" Ruby gem.${RSET}"
+  gem install rubocop
+else
+  echo -e "${HIGH}The \"rubocop\" Ruby gem is already installed.${RSET}"
+fi
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! command -v saf &> /dev/null
 then
-  echo -e "${VERB}Installing MITRE SAF CLI into the Environment.${RSET}"
-  npm install -g npm
-  npm install -g @mitre/saf
+    echo -e "${VERB}Installing MITRE SAF CLI into the Environment.${RSET}"
+    npm install -g npm
+    npm install -g @mitre/saf
 else
-  echo -e "${HIGH}MITRE SAF CLI is already installed.${RSET}"
+    echo -e "${HIGH}MITRE SAF CLI is already installed.${RSET}"
 fi
 
 
