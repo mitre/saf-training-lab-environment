@@ -27,6 +27,8 @@ sudo apt-get install -y tree
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
+echo "gem: --no-ri --no-rdoc" >> ${lab}/.gemrc
+
 if ! command -v inspec &> /dev/null
 then
     echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
