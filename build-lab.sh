@@ -4,7 +4,7 @@ source ./set-prettyOutputVariables.sh
 
 if [[ ! $0 =~ .*/bash ]]
 then
-    echo -e "${WARN}You did not run this script by executing${RSET} ${VERB}source $0${RSET} ${WARN}or${RSET} ${VERB}. $0${RSET} ${WARN}Please try again.${RSET}" 
+    echo -e "\n${WARN}You did not run this script by executing${RSET} ${VERB}source $0${RSET} ${WARN}or${RSET} ${VERB}. $0${RSET} ${WARN}Please try again.${RSET}\n" 
     exit 1
 fi
 
@@ -14,7 +14,7 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 echo -e "${VERB}Setting up the lab environment...${RSET}"
 
 alias lab="cd /workspaces/$(basename $GITHUB_REPOSITORY)"
-echo -e "${HIGH}You can now issue the command ${VERB}lab${RSET} to quickly get back to the working directory.${RSET}"
+echo -e "\n${HIGH}You can now issue the command ${VERB}lab${RSET} ${HIGH}to quickly get back to the working directory.${RSET}"
 
 # Do not install Ruby documentation as it is not needed.
 echo "gem: --no-ri --no-rdoc" > "/workspaces/$(basename $GITHUB_REPOSITORY)/.gemrc"
