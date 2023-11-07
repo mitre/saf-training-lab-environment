@@ -18,7 +18,7 @@ echo -e "\n${HIGH}You can now issue the command ${VERB}lab${RSET} ${HIGH}to quic
 
 # By default, do not install Ruby documentation as it is not needed.
 # Note: The '.gemrc' file must go in the user's home directory.
-echo "gem: --no-ri --no-rdoc" > "${HOME}/.gemrc"
+echo "gem: --no-document" > "${HOME}/.gemrc"
 
 # Accept the Chef license so the students are not prompted when first
 #     starting Inspec.
