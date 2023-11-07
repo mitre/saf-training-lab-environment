@@ -29,6 +29,8 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo "gem: --no-ri --no-rdoc" >> ${lab}/.gemrc
 
+export CHEF_LICENSE="accept-silent"
+
 if ! command -v inspec &> /dev/null
 then
     echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
