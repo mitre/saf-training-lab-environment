@@ -2,12 +2,26 @@
 
 source ./set-prettyOutputVariables.sh
 
+if [[ ! $0 =~ .*/bash ]]
+then
+    echo -e "${WARN}You did not run this script by executing${RSET} ${VERB}source $0${RSET} ${WARN}or${RSET} ${VERB}. $0${RSET} ${WARN}Please try again.${RSET}" 
+    exit 1
+fi
+
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Setting up the lab environment...${RSET}"
 
 alias lab="cd /workspaces/$(basename $GITHUB_REPOSITORY)"
+echo -e "${HIGH}You can issue the command 'lab' to quickly get back to the working directory.${RSET}"
+
+# Do not install Ruby documentation as it is not needed.
+echo "gem: --no-ri --no-rdoc" > ${lab}/.gemrc
+
+# Accept the Chef license so the students are not prompted when first
+#     starting Inspec.
+export CHEF_LICENSE="accept-silent"
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
@@ -21,15 +35,16 @@ code --install-extension esbenp.prettier-vscode
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
-echo -e "${VERB}Installing the \"tree\" utility.${RSET}"
-sudo apt-get install -y tree
+if ! command -v tree &> /dev/null
+then
+    echo -e "${VERB}Installing the \"tree\" utility.${RSET}"
+    sudo apt-get install -y tree
+else
+    echo -e "${HIGH}The \"tree\" utility is already installed.${RSET}"
+fi
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
-
-echo "gem: --no-ri --no-rdoc" >> ${lab}/.gemrc
-
-export CHEF_LICENSE="accept-silent"
 
 if ! command -v inspec &> /dev/null
 then
