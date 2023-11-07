@@ -14,10 +14,10 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 echo -e "${VERB}Setting up the lab environment...${RSET}"
 
 alias lab="cd /workspaces/$(basename $GITHUB_REPOSITORY)"
-echo -e "${HIGH}You can issue the command 'lab' to quickly get back to the working directory.${RSET}"
+echo -e "${HIGH}You can now issue the command ${VERB}lab${RSET} to quickly get back to the working directory.${RSET}"
 
 # Do not install Ruby documentation as it is not needed.
-echo "gem: --no-ri --no-rdoc" > ${lab}/.gemrc
+echo "gem: --no-ri --no-rdoc" > "/workspaces/$(basename $GITHUB_REPOSITORY)/.gemrc"
 
 # Accept the Chef license so the students are not prompted when first
 #     starting Inspec.
