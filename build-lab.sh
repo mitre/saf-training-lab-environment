@@ -33,6 +33,9 @@ code --install-extension shopify.ruby-lsp
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension esbenp.prettier-vscode
 
+# This can help students see indention errors, especially in the YAML files.
+code --install-extension oderwat.indent-rainbow
+
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
@@ -60,10 +63,10 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! gem list --installed rubocop &> /dev/null
 then
-  echo -e "${VERB}Installing the \"rubocop\" Ruby gem.${RSET}"
-  gem install rubocop
+    echo -e "${VERB}Installing the \"rubocop\" Ruby gem.${RSET}"
+    gem install rubocop
 else
-  echo -e "${HIGH}The \"rubocop\" Ruby gem is already installed.${RSET}"
+    echo -e "${HIGH}The \"rubocop\" Ruby gem is already installed.${RSET}"
 fi
 
 
