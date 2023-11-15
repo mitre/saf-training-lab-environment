@@ -53,7 +53,7 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 if ! command -v inspec &> /dev/null
 then
     echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
-    curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec 
+    curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec -v 5
 else
     echo -e "${HIGH}InSpec is already installed.${RSET}"
 fi
