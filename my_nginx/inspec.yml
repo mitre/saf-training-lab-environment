@@ -1,0 +1,27 @@
+name: my_nginx
+title: InSpec Profile
+maintainer: The Authors
+copyright: The Authors
+copyright_email: you@example.com
+license: Apache-2.0
+summary: An InSpec Compliance Profile
+version: 0.1.0
+supports:
+  platform: os
+
+inputs:
+  - name: nginx_version
+    type: String
+    value: 1.10.3
+
+  - name: nginx_modules
+    type: Array
+    value:
+      - http_ssl
+      - stream_ssl
+      - mail_ssl
+
+  - name: admin_users
+    type: Array
+    value:
+      - admin
