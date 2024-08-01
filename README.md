@@ -16,6 +16,8 @@ The repository is setup to be very low overhead, we use a simple `build-lab.sh` 
   - `curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec`
 - MITRE SAF CLI
   - <https://saf-cli.mitre.org>
+- MITRE Heimdall
+  - <https://github.com/mitre/heimdall2>
 - Docker Compose File which starts:
   - RedHat UBI8 Container
   - NGINX Web Server Container

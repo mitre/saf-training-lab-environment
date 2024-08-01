@@ -84,6 +84,18 @@ fi
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
+if ! command -v heimdall2 &> /dev/null
+then
+    echo -e "${VERB}Installing MITRE Heimdall into the Environment.${RSET}"
+    npm install -g npm
+    npm install -g @mitre/heimdall2
+else
+    echo -e "${HIGH}MITRE Heimdall is already installed.${RSET}"
+fi
+
+
+echo -e "${LINE_ASCII_CONSOLE}\n"
+
 echo -e "${VERB}Setting up the required Docker containers.${RSET}"
 
 docker-compose -f docker-compose.yml up -d
