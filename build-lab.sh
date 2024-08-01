@@ -84,6 +84,28 @@ fi
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
+if ! ls -A ./dev_repos/heimdall2
+then
+    echo -e "${VERB}Pulling MITRE Heimdall Lite repository into the Environment.${RSET}"
+    git clone https://github.com/mitre/heimdall2 dev_repos
+else
+    echo -e "${HIGH}MITRE Heimdall Lite repository is already present.${RSET}"
+fi
+
+
+echo -e "${LINE_ASCII_CONSOLE}\n"
+
+if ! ls -A ./dev_repos/saf
+then
+    echo -e "${VERB}Pulling MITRE SAF CLI repository into the Environment.${RSET}"
+    git clone https://github.com/mitre/saf dev_repos
+else
+    echo -e "${HIGH}MITRE SAF CLI repository is already present.${RSET}"
+fi
+
+
+echo -e "${LINE_ASCII_CONSOLE}\n"
+
 echo -e "${VERB}Setting up the required Docker containers.${RSET}"
 
 docker-compose -f docker-compose.yml up -d
