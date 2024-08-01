@@ -7,6 +7,7 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 echo -e "${VERB}Verify the script returns the following information:
 * A \"MITRE SAF\" version number.
+* A \"MITRE Heimdall\" version number.
 * An \"InSpec\" version number.
 * Two running containers:
   - nginx
@@ -19,7 +20,9 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 echo -e "${VERB}Collecting verification information...${RSET}\n"
 
 npm update -g @mitre/saf &> /dev/null
+npm update -g @mitre/heimdall2 &> /dev/null
 versionSaf=$(saf --version 2> /dev/null)
+versionHeimdall=$(heimdall-lite --version 2> /dev/null)
 versionInspec=$(inspec --version 2> /dev/null)
 containersRunning=$(docker ps)
 containersMissing=''
@@ -32,6 +35,14 @@ then
     statusSaf="${FAIL}\"saf\" is not installed.${RSET}"
 else
     statusSaf="${PASS}${versionSaf}${RSET}"
+fi
+
+if [ -z "${versionHeimdall}" ]
+then
+    verificationSuccessful=false
+    statusHeimdall="${FAIL}\"heimdall-lite\" is not installed.${RSET}"
+else
+    statusHeimdall="${PASS}${versionHeimdall}${RSET}"
 fi
 
 if [ -z "${versionInspec}" ]
@@ -54,6 +65,7 @@ then
 fi
 
 echo -e "${HIGH}* MITRE SAF Version:${RSET} ${statusSaf}"
+echo -e "${HIGH}* MITRE Heimdall Lite Version:${RSET} ${statusHeimdall}"
 echo -e "${HIGH}* InSpec Version:${RSET} ${statusInspec}"
 echo -e "${HIGH}* Docker is running the following container(s):${RSET}"
 echo "${containersRunning}" | \
