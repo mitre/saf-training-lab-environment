@@ -86,11 +86,11 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! command -v heimdall2 &> /dev/null
 then
-    echo -e "${VERB}Installing MITRE Heimdall into the Environment.${RSET}"
+    echo -e "${VERB}Installing MITRE Heimdall Lite into the Environment.${RSET}"
     npm install -g npm
-    npm install -g @mitre/heimdall2
+    npm install -g @mitre/heimdall-lite
 else
-    echo -e "${HIGH}MITRE Heimdall is already installed.${RSET}"
+    echo -e "${HIGH}MITRE Heimdall Lite is already installed.${RSET}"
 fi
 
 
