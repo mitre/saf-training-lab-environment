@@ -84,6 +84,10 @@ fi
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
+# Heimdall Lite & SAF CLI use Node v18
+nvm install 18 &> /dev/null
+nvm use 18 &> /dev/null
+
 # First check for Heimdall Lite repo
 if ! ls -A ./dev_repos/heimdall2 &> /dev/null
 then
