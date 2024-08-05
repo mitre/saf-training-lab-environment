@@ -72,6 +72,10 @@ fi
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
+# Heimdall Lite & SAF CLI use Node v18
+nvm install 18 &> /dev/null
+nvm use 18 &> /dev/null
+
 if ! command -v saf &> /dev/null
 then
     echo -e "${VERB}Installing MITRE SAF CLI into the Environment.${RSET}"
@@ -83,10 +87,6 @@ fi
 
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
-
-# Heimdall Lite & SAF CLI use Node v18
-nvm install 18 &> /dev/null
-nvm use 18 &> /dev/null
 
 # First check for Heimdall Lite repo
 if ! ls -A ./dev_repos/heimdall2 &> /dev/null
@@ -105,7 +105,7 @@ if ! ls -A ./dev_repos/heimdall2/node_modules &> /dev/null
 then
     echo -e "${VERB}Installing required Node packages for MITRE Heimdall Lite repository.${RSET}"
     cd dev_repos/heimdall2
-    yarn install
+    yarn install --frozen-lockfile
     cd ../..
 else
     echo -e "${HIGH}MITRE Heimdall Lite Node packages are already present.${RSET}"
@@ -131,7 +131,7 @@ if ! ls -A ./dev_repos/saf/node_modules &> /dev/null
 then
     echo -e "${VERB}Installing required Node packages for MITRE SAF CLI repository.${RSET}"
     cd dev_repos/saf
-    npm install
+    npm ci
     cd ../..
 else
     echo -e "${HIGH}MITRE SAF CLI Node packages are already present.${RSET}"
