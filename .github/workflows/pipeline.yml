@@ -1,6 +1,8 @@
 name: Demo Security Validation Gold Image Pipeline
 
 on:
+  pull_request:                               # trigger this action on any pull request
+    branches: [ main ]                        # against main branch
   push:
     branches: [ main, pipeline ]                # trigger this action on any push to main branch
 
