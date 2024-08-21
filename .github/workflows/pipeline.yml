@@ -1,23 +1,66 @@
-name: Demo Gold Image Pipeline for NGINX
+name: Demo Security Validation Gold Image Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main, pipeline ]                # trigger this action on any push to main branch
 
 jobs:
-  gold-image: 
-    name: Gold Image Pipeline
+  gold-image:
+    name: Gold Image NGINX
     runs-on: ubuntu-20.04
     env:
-      CHEF_LICENSE: accept
-      PROFILE: my_nginx
+      CHEF_LICENSE: accept                      # so that we can use InSpec without manually accepting the license
+      PROFILE: my_nginx                         # path to our profile
     steps:
-      - name: Update ubuntu
-        run: sudo apt-get update -y
-
-      - name: PREP - Install InSpec executable
+      - name: PREP - Update runner              # updating all dependencies is always a good start
+        run: sudo apt-get update
+      - name: PREP - Install InSpec executable 
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec -v 5
 
-      - name: PREP - Install profile
+      - name: PREP - Check out this repository  # because that's where our profile is!
         uses: actions/checkout@v3
+
+      - name: LINT - Run InSpec Check           # double-check that we don't have any serious issues in our profile code
+        run: inspec check $PROFILE
+
+      - name: DEPLOY - Run a Docker container from nginx
+        run: docker run -dit --name nginx nginx:latest
+
+      - name: DEPLOY - Install Python for our nginx container
+        run: |
+          docker exec nginx apt-get update -y
+          docker exec nginx apt-get install -y python3
+
+      - name: HARDEN - Fetch Ansible role
+        run: |
+          git clone --branch docker https://github.com/mitre/ansible-nginx-stigready-hardening.git || true
+          chmod 755 ansible-nginx-stigready-hardening
+
+      - name: HARDEN - Fetch Ansible requirements
+        run: ansible-galaxy install -r ansible-nginx-stigready-hardening/requirements.yml
+
+      - name: HARDEN - Run Ansible hardening
+        run: ansible-playbook --inventory=nginx, --connection=docker ansible-nginx-stigready-hardening/hardening-playbook.yml
+
+      - name: VALIDATE - Run InSpec
+        continue-on-error: true                 # we dont want to stop if our InSpec run finds failures, we want to continue and record the result
+        run: |
+          inspec exec $PROFILE \
+          --input-file=$PROFILE/inputs.yml \
+          --target docker://nginx \
+          --reporter cli json:results/pipeline_run.json
+
+      - name: VALIDATE - Save Test Result JSON  # save our results to the pipeline artifacts, even if the InSpec run found failing tests
+        uses: actions/upload-artifact@v3
+        with:
+          path: results/pipeline_run.json
+
+      - name: VERIFY - Display our results summary 
+        uses: mitre/saf_action@v1
+        with:
+          command_string: "view summary -i results/pipeline_run.json"
+          
+      - name: VERIFY - Ensure the scan meets our results threshold
+        uses: mitre/saf_action@v1             # check if the pipeline passes our defined threshold
+        with:
+          command_string: "validate threshold -i results/pipeline_run.json -F threshold.yml"
