@@ -57,6 +57,11 @@ jobs:
         with:
           path: results/pipeline_run.json
 
+      - name: VALIDATE - Upload to Heimdall
+        continue-on-error: true
+        run: |
+          curl -# -s -F data=@results/pipeline_run.json -F "filename=${{ github.actor }}-pipeline-demo-${{ github.sha }}.json" -F "public=false" -F "${{ github.repository }},${{ github.workflow }}" -H "Authorization: Api-Key ${{ secrets.HEIMDALL_API_KEY }}" "https://heimdall-demo.mitre.org/evaluations"
+
       - name: VERIFY - Display our results summary 
         uses: mitre/saf_action@v1
         with:
