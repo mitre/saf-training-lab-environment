@@ -14,8 +14,12 @@ jobs:
     steps:
       - name: PREP - Update runner              # updating all dependencies is always a good start
         run: sudo apt-get update
+
       - name: PREP - Install InSpec executable 
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec -v 5
+
+      - name: PREP - Install SAF CLI
+        run: npm install -g npm && npm install -g @mitre/saf
 
       - name: PREP - Check out this repository  # because that's where our profile is!
         uses: actions/checkout@v3
@@ -51,9 +55,8 @@ jobs:
           --reporter cli json:results/pipeline_run.json
 
       - name: VALIDATE - Apply an Attestation
-        uses: mitre/saf_action@v1.7.5
-        with:
-          command_string: "attest apply -i results/pipeline_run.json attestation.json -o results/pipeline_run_attested.json" 
+        run: |
+          saf attest apply -i results/pipeline_run.json attestation.json -o results/pipeline_run_attested.json
 
       - name: VALIDATE - Save Test Result JSON  # save our results to the pipeline artifacts, even if the InSpec run found failing tests
         uses: actions/upload-artifact@v3
