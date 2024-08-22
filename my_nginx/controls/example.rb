@@ -53,3 +53,13 @@ control 'nginx-shell-access' do
     end
   end
 end
+
+control 'nginx-interview' do
+  impact 1.0
+  title 'NGINX interview'
+  desc 'NGINX admins should have documentation on security procedures.'
+
+  describe "Manual Review" do
+    skip "This control must be manually reviewed."
+  end
+end
