@@ -1,18 +1,23 @@
 name: Demo Security Validation Gold Image Pipeline
 
-on:                  # against main branch
+# define the triggers for this action
+on:                                             
   push:
-    branches: [ main, pipeline ]                # trigger this action on any push to main branch
+    # trigger this action on any push to main branch
+    branches: [ main, pipeline ]                
 
 jobs:
   gold-image:
     name: Gold Image NGINX
     runs-on: ubuntu-20.04
     env:
-      CHEF_LICENSE: accept                      # so that we can use InSpec without manually accepting the license
-      PROFILE: my_nginx                         # path to our profile
+       # so that we can use InSpec without manually accepting the license
+      CHEF_LICENSE: accept  
+       # path to our profile                   
+      PROFILE: my_nginx                        
     steps:
-      - name: PREP - Update runner              # updating all dependencies is always a good start
+      # updating all dependencies is always a good start
+      - name: PREP - Update runner              
         run: sudo apt-get update
 
       - name: PREP - Install InSpec executable 
@@ -21,20 +26,25 @@ jobs:
       - name: PREP - Install SAF CLI
         run: npm install -g @mitre/saf
 
-      - name: PREP - Check out this repository  # because that's where our profile is!
+      # checkout the profile, because that's where our profile is!
+      - name: PREP - Check out this repository  
         uses: actions/checkout@v3
 
-      - name: LINT - Run InSpec Check           # double-check that we don't have any serious issues in our profile code
+      # double-check that we don't have any serious issues in our profile code
+      - name: LINT - Run InSpec Check           
         run: inspec check $PROFILE
 
+      # launch a container as the test target
       - name: DEPLOY - Run a Docker container from nginx
         run: docker run -dit --name nginx nginx:latest
 
+      # install dependencies on the container so that hardening will work
       - name: DEPLOY - Install Python for our nginx container
         run: |
           docker exec nginx apt-get update -y
           docker exec nginx apt-get install -y python3
 
+      # fetch the hardening role and requirements
       - name: HARDEN - Fetch Ansible role
         run: |
           git clone --branch docker https://github.com/mitre/ansible-nginx-stigready-hardening.git || true
@@ -43,37 +53,41 @@ jobs:
       - name: HARDEN - Fetch Ansible requirements
         run: ansible-galaxy install -r ansible-nginx-stigready-hardening/requirements.yml
 
+      # harden!
       - name: HARDEN - Run Ansible hardening
         run: ansible-playbook --inventory=nginx, --connection=docker ansible-nginx-stigready-hardening/hardening-playbook.yml
 
       - name: VALIDATE - Run InSpec
-        continue-on-error: true                 # we dont want to stop if our InSpec run finds failures, we want to continue and record the result
+        # we dont want to stop if our InSpec run finds failures, we want to continue and record the result
+        continue-on-error: true                
         run: |
           inspec exec $PROFILE \
           --input-file=$PROFILE/inputs-linux.yml \
           --target docker://nginx \
           --reporter cli json:results/pipeline_run.json
 
+      # attest
       - name: VALIDATE - Apply an Attestation
         run: |
           saf attest apply -i results/pipeline_run.json attestation.json -o results/pipeline_run_attested.json
 
-      - name: VALIDATE - Save Test Result JSON  # save our results to the pipeline artifacts, even if the InSpec run found failing tests
+      # save our results to the pipeline artifacts, even if the InSpec run found failing tests
+      - name: VALIDATE - Save Test Result JSON  
         uses: actions/upload-artifact@v3
         with:
           path: results/pipeline_run_attested.json
 
+      # drop off the data with our dashboard
       - name: VALIDATE - Upload to Heimdall
         continue-on-error: true
         run: |
-          curl -# -s -F data=@results/pipeline_run_attested.json -F "filename=${{ github.actor }}-pipeline-demo-${{ github.sha }}.json" -F "public=false" -F "evaluationTags=${{ github.repository }},${{ github.workflow }}" -H "Authorization: Api-Key ${{ secrets.HEIMDALL_API_KEY }}" "https://heimdall-demo.mitre.org/evaluations"
+          curl -# -s -F data=@results/pipeline_run_attested.json -F "filename=${{ github.actor }}-pipeline-demo-${{ github.sha }}.json" -F "public=true" -F "evaluationTags=${{ github.repository }},${{ github.workflow }}" -H "Authorization: Api-Key ${{ secrets.HEIMDALL_API_KEY }}" "https://heimdall-demo.mitre.org/evaluations"
 
       - name: VERIFY - Display our results summary 
-        uses: mitre/saf_action@v1
-        with:
-          command_string: "view summary -i results/pipeline_run_attested.json"
-          
-      - name: VERIFY - Ensure the scan meets our results threshold
-        uses: mitre/saf_action@v1             # check if the pipeline passes our defined threshold
-        with:
-          command_string: "validate threshold -i results/pipeline_run_attested.json -F threshold.yml"
+        run: |
+          saf view summary -i results/pipeline_run_attested.json
+      
+      # check if the pipeline passes our defined threshold
+      - name: VERIFY - Ensure the scan meets our results threshold           
+        run: |
+          saf validate threshold -i results/pipeline_run_attested.json -F threshold.yml
