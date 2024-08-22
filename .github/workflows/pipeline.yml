@@ -50,22 +50,27 @@ jobs:
           --target docker://nginx \
           --reporter cli json:results/pipeline_run.json
 
+      - name: VALIDATE - Apply an Attestation
+        uses: mitre/saf_action@v1
+        with:
+          command_string: "attest -i results/pipeline_run.json -F attestation.json -o results/pipeline_run_attested.json" 
+
       - name: VALIDATE - Save Test Result JSON  # save our results to the pipeline artifacts, even if the InSpec run found failing tests
         uses: actions/upload-artifact@v3
         with:
-          path: results/pipeline_run.json
+          path: results/pipeline_run_attested.json
 
       - name: VALIDATE - Upload to Heimdall
         continue-on-error: true
         run: |
-          curl -# -s -F data=@results/pipeline_run.json -F "filename=${{ github.actor }}-pipeline-demo-${{ github.sha }}.json" -F "public=false" -F "evaluationTags=${{ github.repository }},${{ github.workflow }}" -H "Authorization: Api-Key ${{ secrets.HEIMDALL_API_KEY }}" "https://heimdall-demo.mitre.org/evaluations"
+          curl -# -s -F data=@results/pipeline_run_attested.json -F "filename=${{ github.actor }}-pipeline-demo-${{ github.sha }}.json" -F "public=false" -F "evaluationTags=${{ github.repository }},${{ github.workflow }}" -H "Authorization: Api-Key ${{ secrets.HEIMDALL_API_KEY }}" "https://heimdall-demo.mitre.org/evaluations"
 
       - name: VERIFY - Display our results summary 
         uses: mitre/saf_action@v1
         with:
-          command_string: "view summary -i results/pipeline_run.json"
+          command_string: "view summary -i results/pipeline_run_attested.json"
           
       - name: VERIFY - Ensure the scan meets our results threshold
         uses: mitre/saf_action@v1             # check if the pipeline passes our defined threshold
         with:
-          command_string: "validate threshold -i results/pipeline_run.json -F threshold.yml"
+          command_string: "validate threshold -i results/pipeline_run_attested.json -F threshold.yml"
