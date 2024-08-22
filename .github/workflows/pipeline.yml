@@ -53,7 +53,7 @@ jobs:
       - name: VALIDATE - Apply an Attestation
         uses: mitre/saf_action@v1
         with:
-          command_string: "attest -i results/pipeline_run.json -F attestation.json -o results/pipeline_run_attested.json" 
+          command_string: "attest apply -i results/pipeline_run.json attestation.json -o results/pipeline_run_attested.json" 
 
       - name: VALIDATE - Save Test Result JSON  # save our results to the pipeline artifacts, even if the InSpec run found failing tests
         uses: actions/upload-artifact@v3
