@@ -19,7 +19,7 @@ jobs:
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec -v 5
 
       - name: PREP - Install SAF CLI
-        run: npm install -g npm && npm install -g @mitre/saf
+        run: npm install -g @mitre/saf
 
       - name: PREP - Check out this repository  # because that's where our profile is!
         uses: actions/checkout@v3
