@@ -18,6 +18,7 @@ The repository is setup to be very low overhead, we use a simple `build-lab.sh` 
   - <https://saf-cli.mitre.org>
   - <https://github.com/mitre/saf>
 - MITRE Heimdall Lite
+  - <https://heimdall-lite.mitre.org>
   - <https://github.com/mitre/heimdall2>
 - Docker Compose File which starts:
   - RedHat UBI8 Container

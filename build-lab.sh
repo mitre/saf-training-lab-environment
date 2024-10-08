@@ -88,58 +88,6 @@ fi
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
-# First check for Heimdall Lite repo
-if ! ls -A ./dev_repos/heimdall2 &> /dev/null
-then
-    echo -e "${VERB}Pulling down MITRE Heimdall Lite repository into the Environment.${RSET}"
-    git clone https://github.com/mitre/heimdall2 dev_repos/heimdall2
-else
-    echo -e "${HIGH}MITRE Heimdall Lite repository is already present.${RSET}"
-fi
-
-
-echo -e "${LINE_ASCII_CONSOLE}\n"
-
-# Then check for Node packages
-if ! ls -A ./dev_repos/heimdall2/node_modules &> /dev/null
-then
-    echo -e "${VERB}Installing required Node packages for MITRE Heimdall Lite repository.${RSET}"
-    cd dev_repos/heimdall2
-    yarn install --frozen-lockfile
-    cd ../..
-else
-    echo -e "${HIGH}MITRE Heimdall Lite Node packages are already present.${RSET}"
-fi
-
-
-echo -e "${LINE_ASCII_CONSOLE}\n"
-
-# First check for SAF CLI repo
-if ! ls -A ./dev_repos/saf &> /dev/null
-then
-    echo -e "${VERB}Pulling down MITRE SAF CLI repository into the Environment.${RSET}"
-    git clone https://github.com/mitre/saf dev_repos/saf
-else
-    echo -e "${HIGH}MITRE SAF CLI repository is already present.${RSET}"
-fi
-
-
-echo -e "${LINE_ASCII_CONSOLE}\n"
-
-# Then check for Node packages
-if ! ls -A ./dev_repos/saf/node_modules &> /dev/null
-then
-    echo -e "${VERB}Installing required Node packages for MITRE SAF CLI repository.${RSET}"
-    cd dev_repos/saf
-    npm ci
-    cd ../..
-else
-    echo -e "${HIGH}MITRE SAF CLI Node packages are already present.${RSET}"
-fi
-
-
-echo -e "${LINE_ASCII_CONSOLE}\n"
-
 echo -e "${VERB}Setting up the required Docker containers.${RSET}"
 
 docker-compose -f docker-compose.yml up -d
