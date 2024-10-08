@@ -28,18 +28,21 @@ The repository is setup to be very low overhead, we use a simple `build-lab.sh` 
 
 To use the lab:
 
-01. Make sure you've signed in to your GitHub Account
+1. Make sure you've signed in to your GitHub Account
 
-02. On the [SAF Training repo](https://github.com/mitre/saf-training-lab-environment/tree/main), click the green 'Use this template' dropdown button and select 'Create a new repository'
+2. On the [SAF Training repo](https://github.com/mitre/saf-training-lab-environment/tree/main), click the green 'Use this template' dropdown button and select 'Create a new repository'
 
     ![green button with the words 'use this template' in white text](https://user-images.githubusercontent.com/79539195/213498628-934c3343-4b9a-4488-9295-d21840e766f6.png)
 
     ![green dropdown with 2 options, the first one says 'create a new repository' and is highlighted with a red box. the second option says 'open in a codespace'](https://user-images.githubusercontent.com/79539195/213499867-0a2bbff2-9593-443d-a8c5-dd9170ddca9e.png)
 
-03. Check to make sure your username is the owner of the new repository and enter a name for your repository.
+3. Check to make sure your username is the owner of the new repository and enter a name for your repository.
     We recommend using the name `saf-training-lab-environment` for ease. Additionally, feel free to make your repository public, if it isn't already.
 
-5. Click the 'Create repository from template' button at the bottom
+    ![form to create a new repository based off of the SAF training lab environment template](https://github.com/user-attachments/assets/87d8aa26-e00c-4933-a18d-fe3259c12757)
+
+
+4. Click the 'Create repository from template' button at the bottom
 
     > **Note**
     >
@@ -47,11 +50,11 @@ To use the lab:
 
     ![green button that says 'create repository from template'](https://user-images.githubusercontent.com/79539195/213503629-13ecb85b-c173-4f8b-ba1b-be6cd194a9f7.png)
 
-6. Wait for your repository to open up, then click the 'Code' drop down button
+5. Wait for your repository to open up, then click the 'Code' drop down button
 
     ![green button that says 'code'](https://user-images.githubusercontent.com/79539195/213504430-e0417daf-e1e9-40b2-9c82-541a7f766ced.png) 
 
-7. After clicking the 'Code' button, a drop down menu should display, with a 'Local' and a 'Codespace' option. Select the 'Codespace' tab, then click the button that says 'Create codespace on main' 
+6. After clicking the 'Code' button, a drop down menu should display, with a 'Local' and a 'Codespace' option. Select the 'Codespace' tab, then click the button that says 'Create codespace on main' 
 
     > **Note**
     >
@@ -59,11 +62,11 @@ To use the lab:
 
     ![codespaces menu](https://user-images.githubusercontent.com/79539195/213504777-b74cf75a-6dec-4a39-8c52-a5ff4a8b07c3.png)
 
-8. A new tab in your browser should open up with your Codespace. It should open up the README.md file, with a terminal at the bottom. 
+7. A new tab in your browser should open up with your Codespace. It should open up the README.md file, with a terminal at the bottom featuring your own username. 
 
-   ![view of codespace when it first opens up](https://user-images.githubusercontent.com/79539195/213515461-4c13b23a-1cd1-4e92-9d7b-3128a583d09a.png)
+   ![view of codespace when it first opens up](https://github.com/user-attachments/assets/72513063-a937-4514-a5fb-8df129275bcb)
 
-08. In the terminal, run the `build-lab.sh` script:
+8. In the terminal, run the `build-lab.sh` script:
 
     ```sh
     source ./build-lab.sh
@@ -71,11 +74,11 @@ To use the lab:
 
     Once the script finishes your terminal should display something like the following, right before your username and the path to your codespace:
 
-    ![image of terminal after running the lab-setup command](https://user-images.githubusercontent.com/79539195/213518549-79a83522-4bcc-412c-9178-7130b1bae4e5.png)
+    ![image of terminal after running the lab-setup command](https://github.com/user-attachments/assets/19a7cfed-317d-47fc-bf2e-67530e495c48)
 
     Your environment should have the MITRE SAF CLI installed as `saf`, InSpec installed as `inspec`, and two running docker containers tagged as 'nginx' and 'redhat8'.
 
-09. Once complete, you can verify the setup in your environment with the `test-lab.sh` script:
+9. Once complete, you can verify the setup in your environment with the `test-lab.sh` script:
 
     ```sh
     ./test-lab.sh
@@ -106,11 +109,9 @@ To use the lab:
     
     _______________________________________________________________________________________________________________
     
-    Verification complete.
+    All verification tests completed successfully.
   
     ```
-
-    ![screenshot of terminal after running the verify-lab command](https://user-images.githubusercontent.com/79539195/213518892-a50e0044-f1ae-43bb-bbf4-5a48af3ccb5e.png)
 
 ## Codespaces
 
