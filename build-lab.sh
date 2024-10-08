@@ -79,7 +79,6 @@ nvm use 18 &> /dev/null
 if ! command -v saf &> /dev/null
 then
     echo -e "${VERB}Installing MITRE SAF CLI into the Environment.${RSET}"
-    npm install -g npm
     npm install -g @mitre/saf
 else
     echo -e "${HIGH}MITRE SAF CLI is already installed.${RSET}"
