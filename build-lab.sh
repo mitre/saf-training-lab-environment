@@ -52,8 +52,8 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! command -v inspec &> /dev/null
 then
-    echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
-    curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec -v 5
+    echo -e "${VERB}Installing InSpec (CINC Auditor Distribution) into the Environment.${RSET}"
+    curl -L https://omnitruck.cinc.sh/install.sh | sudo bash -s -- -P cinc-auditor -v 6
 else
     echo -e "${HIGH}InSpec is already installed.${RSET}"
 fi
@@ -73,8 +73,8 @@ fi
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
 # Heimdall Lite & SAF CLI use Node v18
-nvm install 18 &> /dev/null
-nvm use 18 &> /dev/null
+nvm install 20 &> /dev/null
+nvm use 20 &> /dev/null
 
 if ! command -v saf &> /dev/null
 then
