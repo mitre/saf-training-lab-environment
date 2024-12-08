@@ -2,8 +2,8 @@
 version: '3'
 services:
   operatingsystem:
-    image: redhat/ubi8
-    container_name: redhat8
+    image: redhat/ubi9
+    container_name: redhat9
     tty: true
     stdin_open: true
     restart: always

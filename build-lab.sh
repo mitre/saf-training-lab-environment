@@ -22,6 +22,7 @@ echo "gem: --no-document" > "${HOME}/.gemrc"
 
 # Accept the Chef license so the students are not prompted when first
 #     starting Inspec.
+export LICENSE_ID="free-7254f65d-389d-4ea8-bd08-c08e921b08a7-6456"
 export CHEF_LICENSE="accept-silent"
 
 
@@ -52,8 +53,11 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 
 if ! command -v inspec &> /dev/null
 then
-    echo -e "${VERB}Installing InSpec into the Environment.${RSET}"
-    curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P inspec -v 5
+    echo -e "${VERB}Installing InSpec (CINC Auditor Distribution) into the Environment.${RSET}"
+    # install InSpec
+    curl https://chefdownload-commercial.chef.io/install.sh?license_id=$LICENSE_ID | sudo bash -s -- -P inspec
+    # put the license info in place
+    cp -r ./.chef ~/.chef 
 else
     echo -e "${HIGH}InSpec is already installed.${RSET}"
 fi
@@ -73,8 +77,8 @@ fi
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
 # Heimdall Lite & SAF CLI use Node v18
-nvm install 18 &> /dev/null
-nvm use 18 &> /dev/null
+nvm install 20 &> /dev/null
+nvm use 20 &> /dev/null
 
 if ! command -v saf &> /dev/null
 then
