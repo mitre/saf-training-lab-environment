@@ -22,7 +22,7 @@ echo "gem: --no-document" > "${HOME}/.gemrc"
 
 # Accept the Chef license so the students are not prompted when first
 #     starting Inspec.
-export LICENSE_ID="free-7254f65d-389d-4ea8-bd08-c08e921b08a7-6456"
+export LICENSE_ID="tmns-07cf57df-2128-42c3-9ad7-655a22820031-4280"
 export CHEF_LICENSE="accept-silent"
 
 
