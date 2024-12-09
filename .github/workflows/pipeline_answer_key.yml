@@ -4,7 +4,7 @@ name: Demo Security Validation Gold Image Pipeline
 on:                                             
   push:
     # trigger this action on any push to main branch
-    branches: [ main, pipeline ]                
+    branches: [ main, pipeline, answer_key ]                
 
 jobs:
   gold-image:
@@ -14,7 +14,7 @@ jobs:
        # so that we can use InSpec without manually accepting the license
       CHEF_LICENSE: accept  
        # path to our profile                   
-      PROFILE: my_nginx                        
+      PROFILE: my_nginx_answer_key
     steps:
       # updating all dependencies is always a good start
       - name: PREP - Update runner              
@@ -62,7 +62,7 @@ jobs:
         continue-on-error: true                
         run: |
           inspec exec $PROFILE \
-          --input-file=$PROFILE/inputs-linux.yml \
+          --input-file=$PROFILE/inputs.yml \
           --target docker://nginx \
           --reporter cli json:results/pipeline_run.json
 
