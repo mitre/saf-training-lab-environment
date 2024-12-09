@@ -19,15 +19,7 @@ echo -e "\n${HIGH}You can now issue the command ${VERB}lab${RSET} ${HIGH}to quic
 # By default, do not install Ruby documentation as it is not needed.
 # Note: The '.gemrc' file must go in the user's home directory.
 echo "gem: --no-document" > "${HOME}/.gemrc"
-
-# Accept the Chef license so the students are not prompted when first
-#     starting Inspec.
-export LICENSE_ID="tmns-07cf57df-2128-42c3-9ad7-655a22820031-4280"
-export CHEF_LICENSE="accept-silent"
-
-
 echo -e "${LINE_ASCII_CONSOLE}\n"
-
 echo -e "${VERB}Installing Code extensions.${RSET}\n"
 
 code --install-extension shopify.ruby-lsp
@@ -54,10 +46,7 @@ echo -e "${LINE_ASCII_CONSOLE}\n"
 if ! command -v inspec &> /dev/null
 then
     echo -e "${VERB}Installing InSpec (CINC Auditor Distribution) into the Environment.${RSET}"
-    # install InSpec
-    curl https://chefdownload-commercial.chef.io/install.sh?license_id=$LICENSE_ID | sudo bash -s -- -P inspec
-    # put the license info in place
-    cp -r ./.chef ~/.chef 
+    curl -L https://omnitruck.cinc.sh/install.sh | sudo bash -s -- -P cinc-auditor -v 6
 else
     echo -e "${HIGH}InSpec is already installed.${RSET}"
 fi
