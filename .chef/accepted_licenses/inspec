@@ -1,8 +1,0 @@
----
-id: inspec
-name: Chef InSpec
-date_accepted: '2024-12-08T19:28:12+00:00'
-accepting_product: inspec
-accepting_product_version: 6.8.11
-user: codespace
-file_format: 1
