@@ -73,7 +73,7 @@ jobs:
 
       # save our results to the pipeline artifacts, even if the InSpec run found failing tests
       - name: VALIDATE - Save Test Result JSON  
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: results/pipeline_run_attested.json
 
