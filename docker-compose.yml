@@ -14,3 +14,15 @@ services:
     tty: true
     stdin_open: true
     restart: always
+
+  db:
+    image: postgres:latest
+    container_name: test_postgres
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: testdb
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
