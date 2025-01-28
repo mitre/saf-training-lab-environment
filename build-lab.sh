@@ -65,9 +65,9 @@ fi
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
-# Heimdall Lite & SAF CLI use Node v18
-nvm install 20 &> /dev/null
-nvm use 20 &> /dev/null
+# Heimdall Lite & SAF CLI use Node v22
+nvm install 22 &> /dev/null
+nvm use 22 &> /dev/null
 
 if ! command -v saf &> /dev/null
 then
