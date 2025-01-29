@@ -84,6 +84,24 @@ echo -e "${VERB}Setting up the required Docker containers.${RSET}"
 
 docker-compose -f docker-compose.yml up -d
 
+# Function to install psql on Ubuntu 20.04 used for postgres InSpec development and testing
+install_psql_ubuntu() {
+    echo "Installing PostgreSQL client on Ubuntu 20.04..."
+    sudo apt update
+    sudo apt install -y postgresql-client
+}
+
+# Run the installation function
+install_psql_ubuntu
+
+# Verify installation
+if command -v psql &>/dev/null; then
+    echo "psql installed successfully."
+    psql --version
+else
+    echo "psql installation failed."
+fi
+
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 
