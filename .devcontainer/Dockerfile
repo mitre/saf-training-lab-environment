@@ -22,4 +22,4 @@ ARG CINC_VERSION
 RUN /bin/bash -c "source /tmp/.env && curl -L https://omnitruck.cinc.sh/install.sh -k | bash -s -- -P \${CINC_PACKAGE} -v \${CINC_VERSION}"
 
 # Install MITRE SAF CLI
-RUN /bin/bash -c "source $NVM_DIR/nvm.sh && npm install -g @mitre/saf"
+RUN /bin/bash -c "npm install -g @mitre/saf"

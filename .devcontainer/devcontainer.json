@@ -29,22 +29,26 @@
             "version": "3.1"
         },
         "ghcr.io/devcontainers/features/node:1": {
-            "version": "22"
+            "version": "22",
+            "installNvm": true
         },
         "ghcr.io/devcontainers/features/git:1": {},
-        // "ghcr.io/devcontainers/features/python:1": {
-        //     "version": "3.9"
-        // },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.9"
+        },
         // "ghcr.io/devcontainers/features/terraform:1": {},
         "ghcr.io/devcontainers/features/azure-cli:1": {},
         "ghcr.io/devcontainers/features/aws-cli:1": {},
         // Alternative PostgreSQL feature source
         // "ghcr.io/devcontainers/features/postgres:1": {
         //     "version": "13"
-        // }
+        // },
+        "ghcr.io/devcontainers/features/nvm:1": {
+            "version": "0.39.1"
+        }
     },
     "overrideCommand": false,
-    "postCreateCommand": "chmod +x ${containerWorkspaceFolder}/.devcontainer/scripts/*.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/post-create-setup.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/update-nvmrc.sh",
+    "postCreateCommand": ". ${NVM_DIR}/nvm.sh && npm install && chmod +x ${containerWorkspaceFolder}/.devcontainer/scripts/*.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/post-create-setup.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/update-nvmrc.sh",
     "customizations": {
         "vscode": {
             "extensions": [
