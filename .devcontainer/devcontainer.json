@@ -42,10 +42,7 @@
         // Alternative PostgreSQL feature source
         // "ghcr.io/devcontainers/features/postgres:1": {
         //     "version": "13"
-        // },
-        "ghcr.io/devcontainers/features/nvm:1": {
-            "version": "0.39.1"
-        }
+        // }
     },
     "overrideCommand": false,
     "postCreateCommand": ". ${NVM_DIR}/nvm.sh && npm install && chmod +x ${containerWorkspaceFolder}/.devcontainer/scripts/*.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/post-create-setup.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/update-nvmrc.sh",
