@@ -3,7 +3,7 @@
 set -e          # Exit immediately if a command exits with a non-zero status
 set -u          # Treat unset variables as an error and exit immediately
 set -o pipefail # Consider a pipeline to fail if any command in the pipeline fails
-set -x          # Print each command before executing
+# set -x          # Print each command before executing
 
 echo "Running post-create-setup.sh from $PWD"
 echo $PWD
@@ -37,21 +37,59 @@ else
     echo -e "${WARN}.gitconfig not found in .devcontainer directory${RSET}"
 fi
 
-# Install dependencies
-echo -e "${VERB}Installing dependencies...${RSET}"
+# Disable problematic repositories
+# echo -e "${VERB}Disabling problematic repositories...${RSET}"
+# sudo sed -i 's|^deb https://dl.yarnpkg.com/debian stable main|# deb https://dl.yarnpkg.com/debian stable main|' /etc/apt/sources.list.d/yarn.list || true
+# sudo sed -i 's|^deb https://packagecloud.io/github/git-lfs/ubuntu focal main|# deb https://packagecloud.io/github/git-lfs/ubuntu focal main|' /etc/apt/sources.list.d/github_git-lfs.list || true
+
+# Install ca-certificates first
+echo -e "${VERB}Installing ca-certificates...${RSET}"
+if ! sudo apt-get update && sudo apt-get install -y ca-certificates; then
+    echo -e "${WARN}Failed to install ca-certificates, continuing...${RSET}"
+fi
+
+# Copy extra CA certificates and update CA certificates
+echo -e "${VERB}Copying extra CA certificates and updating CA certificates...${RSET}"
+if [ -f .devcontainer/extra-ca.pem ]; then
+    sudo cp .devcontainer/extra-ca.pem /usr/local/share/ca-certificates/extra-ca.crt
+    sudo update-ca-certificates
+else
+    echo -e "${WARN}extra-ca.pem not found in .devcontainer directory${RSET}"
+fi
+
+# Install remaining dependencies
+echo -e "${VERB}Installing remaining dependencies...${RSET}"
 if ! sudo apt-get update && sudo apt-get install -y \
     tree \
     curl \
-    ca-certificates \
     postgresql postgresql-contrib; then
     echo -e "${FAIL}Failed to install dependencies${RSET}"
     exit 1
 fi
 
-# Upgrade to Node.js ${NODE_VERSION}
-echo -e "${VERB}Upgrading to Node.js ${NODE_VERSION}...${RSET}"
-if ! . ${NVM_DIR}/nvm.sh && nvm install ${NODE_VERSION} && nvm use ${NODE_VERSION}; then
-    echo -e "${FAIL}Failed to upgrade Node.js${RSET}"
+# Uninstall existing Node.js versions
+echo -e "${VERB}Uninstalling existing Node.js versions...${RSET}"
+if . ${NVM_DIR}/nvm.sh; then
+    if nvm ls | grep -q "v20.18.1"; then
+        nvm uninstall 20.18.1 || true
+    fi
+    if nvm ls | grep -q "v22"; then
+        nvm uninstall 22 || true
+    fi
+fi
+
+# Install Node.js 22 using NodeSource repository
+echo -e "${VERB}Installing Node.js 22 using NodeSource repository...${RSET}"
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+if ! sudo apt-get install -y nodejs; then
+    echo -e "${FAIL}Failed to install Node.js${RSET}"
+    exit 1
+fi
+
+# Verify Node.js version
+echo -e "${VERB}Verifying Node.js version...${RSET}"
+if ! node -v | grep "v22"; then
+    echo -e "${FAIL}Node.js version is not 22${RSET}"
     exit 1
 fi
 
