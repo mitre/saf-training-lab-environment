@@ -3,18 +3,41 @@
 set -e          # Exit immediately if a command exits with a non-zero status
 set -u          # Treat unset variables as an error and exit immediately
 set -o pipefail # Consider a pipeline to fail if any command in the pipeline fails
+set -x          # Print each command before executing
 
-echo "Running post-create-setup.sh"
+echo "Running post-create-setup.sh from $PWD"
+
+# Ensure we're in the repository root
+REPO_ROOT="/workspaces/${REPOSITORY_NAME}"
+if [ "$PWD" != "$REPO_ROOT" ]; then
+    cd "$REPO_ROOT"
+fi
 
 # Source pretty output variables
-source /workspace/.devcontainer/scripts/set-pretty-output-variables.sh
+source .devcontainer/scripts/set-pretty-output-variables.sh
 
 # Load environment variables
-source /workspace/.devcontainer/.env
+echo -e "${VERB}Sourcing env vars..${RSET}"
+source .devcontainer/.env
+
+# Function to set up alias
+setup_alias() {
+    local alias_command=$1
+    local alias_definition=$2
+    echo -e "${VERB}Setting up alias for ${alias_command}...${RSET}"
+    echo "alias ${alias_command}='${alias_definition}'" >>~/.bashrc
+}
 
 # Set up alias for lab command
-echo -e "${VERB}Setting up alias for lab command...${RSET}"
-echo "alias lab='cd /workspace'" >>~/.bashrc
+setup_alias "lab" "cd ${REPO_ROOT}"
+
+# Copy .gitconfig to home directory
+echo -e "${VERB}Copying .gitconfig to home directory...${RSET}"
+if [ -f .devcontainer/.gitconfig ]; then
+    cp .devcontainer/.gitconfig ~/
+else
+    echo -e "${WARN}.gitconfig not found in .devcontainer directory${RSET}"
+fi
 
 # Install dependencies
 echo -e "${VERB}Installing dependencies...${RSET}"
@@ -41,9 +64,15 @@ if ! npm install -g @mitre/saf || ! curl -L https://omnitruck.cinc.sh/install.sh
     exit 1
 fi
 
+# Check if docker-compose is installed
+if ! command -v docker-compose &>/dev/null; then
+    echo -e "${FAIL}docker-compose could not be found${RSET}"
+    exit 1
+fi
+
 # Set up Docker containers
 echo -e "${VERB}Setting up Docker containers...${RSET}"
-if ! docker-compose -f /workspace/.devcontainer/docker-compose.yml up -d; then
+if ! docker-compose -f .devcontainer/docker-compose.yml up -d; then
     echo -e "${FAIL}Failed to set up Docker containers${RSET}"
     exit 1
 fi
@@ -86,12 +115,11 @@ else
 fi
 
 # Set up additional aliases
-echo -e "${VERB}Setting up additional aliases...${RSET}"
-echo "alias ll='ls -la'" >>~/.bashrc
+setup_alias "ll" "ls -la"
 
 # Clean up
 echo -e "${VERB}Cleaning up...${RSET}"
 sudo apt-get clean
-rm -rf /var/lib/apt/lists/*
+sudo rm -rf /var/lib/apt/lists/*
 
 echo -e "${PASS}Post-create setup script completed successfully.${RSET}"
