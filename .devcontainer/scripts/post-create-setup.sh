@@ -6,12 +6,7 @@ set -o pipefail # Consider a pipeline to fail if any command in the pipeline fai
 set -x          # Print each command before executing
 
 echo "Running post-create-setup.sh from $PWD"
-
-# Ensure we're in the repository root
-REPO_ROOT="/workspaces/${REPOSITORY_NAME}"
-if [ "$PWD" != "$REPO_ROOT" ]; then
-    cd "$REPO_ROOT"
-fi
+echo $PWD
 
 # Source pretty output variables
 source .devcontainer/scripts/set-pretty-output-variables.sh
