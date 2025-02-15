@@ -6,18 +6,18 @@ set -o pipefail # Consider a pipeline to fail if any command in the pipeline fai
 
 # Debug output
 echo "Running post-create-setup.sh"
-echo "containerWorkspaceFolder: ${containerWorkspaceFolder}"
-echo "workspaceFolder: ${workspaceFolder}"
+echo "containerWorkspaceFolder: /workspace"
+echo "workspaceFolder: /workspace"
 
 # Source pretty output variables
-source ${containerWorkspaceFolder}/.devcontainer/scripts/set-pretty-output-variables.sh
+source /workspace/.devcontainer/scripts/set-pretty-output-variables.sh
 
 # Load environment variables
-source ${containerWorkspaceFolder}/.devcontainer/.env
+source /workspace/.devcontainer/.env
 
 # Set up alias for lab command
 echo "Setting up alias for lab command..."
-echo "alias lab='cd ${containerWorkspaceFolder}'" >>~/.bashrc
+echo "alias lab='cd /workspace'" >>~/.bashrc
 
 # Install dependencies
 echo "Installing dependencies..."
@@ -50,7 +50,7 @@ curl -L https://omnitruck.cinc.sh/install.sh -k | bash -s -- -P ${CINC_PACKAGE} 
 
 # Set up Docker containers
 echo "Setting up Docker containers..."
-docker-compose -f ${containerWorkspaceFolder}/.devcontainer/docker-compose.yml up -d || {
+docker-compose -f /workspace/.devcontainer/docker-compose.yml up -d || {
     echo "Failed to set up Docker containers"
     exit 1
 }
@@ -88,3 +88,9 @@ sudo apt-get clean
 rm -rf /var/lib/apt/lists/*
 
 echo "Post-create setup script completed successfully."
+
+#!/bin/sh
+
+# Add your setup commands here
+echo "Running post-create setup..."
+# ...additional setup commands...
