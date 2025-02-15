@@ -1,11 +1,10 @@
-version: '3.8'
-
 services:
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
       - '80:80'
-  redhat8:
-    image: registry.access.redhat.com/ubi8/ubi:latest
-    container_name: redhat8
+  redhat9:
+    image: registry.access.redhat.com/ubi9/ubi:latest
+    container_name: redhat9
+    command: tail -f /dev/null

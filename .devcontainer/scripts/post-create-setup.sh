@@ -59,7 +59,7 @@ spinner || {
 echo -e "${VERB}Installing SAF-CLI and ${CINC_PACKAGE}v${CINC_VERSION}...${RSET}"
 {
     npm install -g @mitre/saf
-    curl -L https://omnitruck.cinc.sh/install.sh -k | bash -s -- -P ${CINC_PACKAGE} -v ${CINC_VERSION}
+    curl -L https://omnitruck.cinc.sh/install.sh -k | sudo bash -s -- -P ${CINC_PACKAGE} -v ${CINC_VERSION}
 } &
 spinner || {
     echo -e "${FAIL}Failed to install @mitre/saf-cli or cinc-auditor${RSET}"
@@ -100,16 +100,18 @@ if ! echo "${containersRunning}" | grep --silent --extended-regexp 'nginx'; then
     verificationSuccessful=false
     containersMissing="${containersMissing}The \"nginx\" container is missing.\n"
 fi
-if ! echo "${containersRunning}" | grep --silent --extended-regexp 'redhat8'; then
+if ! echo "${containersRunning}" | grep --silent --extended-regexp 'redhat9'; then
     verificationSuccessful=false
-    containersMissing="${containersMissing}The \"redhat8\" container is missing.\n"
+    containersMissing="${containersMissing}The \"redhat9\" container is missing.\n"
+    echo -e "${FAIL}Checking logs for redhat9 container...${RSET}"
+    docker logs redhat9
 fi
 
 echo -e "${HIGH}* Docker is running the following container(s):${RSET}"
 echo "${containersRunning}" |
     GREP_COLORS='mt=0;32' \
         grep --color=always --extended-regexp \
-        'nginx$|redhat8$|$'
+        'nginx$|redhat9$|$'
 echo -e "${FAIL}${containersMissing}${RSET}"
 
 if $verificationSuccessful; then
