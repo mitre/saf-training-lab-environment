@@ -1,0 +1,3 @@
+NODE_VERSION='v23.6.0'
+CINC_PACKAGE='cinc-auditor'
+CINC_VERSION='6'

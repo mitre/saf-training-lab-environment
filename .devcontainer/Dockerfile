@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
 
 # Install dependencies and update CA certificates
 COPY extra-ca.pem /usr/local/share/ca-certificates/extra-ca.crt
-COPY .env /tmp/.env
+COPY env-vars /tmp/.env
 RUN apt-get update && apt-get install -y \
     tree \
     curl \
