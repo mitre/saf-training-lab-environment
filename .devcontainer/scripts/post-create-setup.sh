@@ -15,6 +15,9 @@ source .devcontainer/scripts/set-pretty-output-variables.sh
 echo -e "${VERB}Sourcing env vars..${RSET}"
 source .devcontainer/.env
 
+# Set REPO_ROOT environment variable
+export REPO_ROOT="/workspace"
+
 # Function to set up alias
 setup_alias() {
     local alias_command=$1
