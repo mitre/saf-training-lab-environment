@@ -4,6 +4,11 @@ set -e          # Exit immediately if a command exits with a non-zero status
 set -u          # Treat unset variables as an error and exit immediately
 set -o pipefail # Consider a pipeline to fail if any command in the pipeline fails
 
+# Debug output
+echo "Running post-create-setup.sh"
+echo "containerWorkspaceFolder: ${containerWorkspaceFolder}"
+echo "workspaceFolder: ${workspaceFolder}"
+
 # Source pretty output variables
 source ${containerWorkspaceFolder}/.devcontainer/scripts/set-pretty-output-variables.sh
 
