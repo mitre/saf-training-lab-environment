@@ -1,0 +1,131 @@
+[http]
+postBuffer = 524288000
+sslVerify = false
+
+[core]
+pager = less -FRX
+editor = vim
+excludesfile = ~/.gitignore_global
+
+[url "https://"]
+insteadOf = git://
+
+[alias]
+a = add --all
+ap = add -p
+au = add --update
+b = branch
+ba = branch -a
+bi = bisect
+cl = clone
+co = checkout
+com = !git checkout "$(git rev-list HEAD --max-count 1)" && git branch -d master && git checkout master
+corm = !git checkout $1 && git rebase origin/master
+cofm = !git fetch --all --prune && git checkout $1 && git rebase origin/master
+codm = !NAME=$(git rev-parse --abbrev-ref HEAD) && test -n "$NAME" && git fetch --all --prune && git checkout master && git pull && git branch -d "$NAME"
+d = diff --color
+dc = diff --color --cached
+dd = difftool --dir-diff
+f = fetch
+fa = fetch --all --prune
+feb = !REFI="$(echo $1)" && PULL_ID="$(echo $REFI | sed 's_.*/__' | tr -d '[[:space:]]')" && BRANCH="pr/$PULL_ID" && git fetch origin pull/$PULL_ID/head:$BRANCH && sleep 1 && git checkout $BRANCH && echo "You are on $BRANCH from "
+commit = commit -s
+c = commit -s
+cc = commit --amend
+cm = commit -m
+ca = commit -a -s
+cam = commit -a -s -m
+cp = commit -s -p
+cs = commit -s -m
+l = log --color --oneline --graph --decorate=short --all --simplify-by-decoration
+ll = log --color --oneline --graph --decorate=short --all
+lm = log --color --format="%C(green)%s%C(yellow)%d%Creset%n%b" --graph --decorate=short --merges
+lam = log --color --format="%C(green)%s%C(yellow)%d%Creset%n%b" --graph --decorate=short --merges --all
+ld = log --color --decorate=short -p
+lad = log --color --decorate=short -p --all
+lp = log --color --oneline --decorate=short -p
+lap = log --color --oneline --decorate=short -p --all
+lt = log --color --graph --decorate=short --all --simplify-by-decoration
+llt = log --color --graph --decorate=short --all
+lls = log --color --graph --decorate=short --all --stat
+lf = log --color --oneline --graph --decorate=short --name-only
+laf = log --color --oneline --graph --decorate=short --name-only --all
+m = merge --no-ff
+mf = merge --ff-only
+p = push
+pa = push --all
+pt = push --tags
+po = push -u origin
+pu = push -u origin --force-with-lease
+pl = pull
+pla = pull --all
+rpa = remote prune --dry-run
+rp = remote prune
+r = reset
+ri = rebase -i
+rim = rebase -i master
+rio = rebase -i origin/master
+rsh = reset --soft HEAD
+rhh = reset --hard HEAD
+s = status --short
+ss = status
+t = tag
+
+[apply]
+whitespace = fix
+
+[pager]
+status = true
+
+[merge]
+tool = meld
+
+[mergetool "meld"]
+trustExitCode = true
+
+[push]
+default = matching
+
+[color]
+ui = auto
+
+[giggle]
+main-window-maximized = true
+main-window-geometry = 0x0+0+0
+history-view-vpane-position = 293
+main-window-view = HistoryView
+file-view-vpane-position = 530
+
+[filter "lfs"]
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
+
+[difftool "sourcetree"]
+cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+path =
+
+[mergetool "sourcetree"]
+cmd = /private/var/folders/c4/0vsc4qvj4358b8099_hvv0mh0000gn/T/AppTranslocation/4EE62698-9455-4E7F-AE96-D69F92474948/d/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+trustExitCode = true
+
+[credential]
+helper = osxkeychain
+helper =
+helper = /usr/local/share/gcm-core/git-credential-manager
+
+[pull]
+rebase = true
+
+[init]
+defaultBranch = main
+
+[credential "https://github.com"]
+helper = !/opt/homebrew/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+helper = !/opt/homebrew/bin/gh auth git-credential
+
+[credential "https://dev.azure.com"]
+useHttpPath = true
