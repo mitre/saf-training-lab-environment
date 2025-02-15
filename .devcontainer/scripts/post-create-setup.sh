@@ -4,21 +4,6 @@ set -e          # Exit immediately if a command exits with a non-zero status
 set -u          # Treat unset variables as an error and exit immediately
 set -o pipefail # Consider a pipeline to fail if any command in the pipeline fails
 
-# Function to show a spinner
-spinner() {
-    local pid=$!
-    local delay=0.1
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
-}
-
 echo "Running post-create-setup.sh"
 
 # Source pretty output variables
@@ -33,62 +18,42 @@ echo "alias lab='cd /workspace'" >>~/.bashrc
 
 # Install dependencies
 echo -e "${VERB}Installing dependencies...${RSET}"
-{
-    sudo apt-get update && sudo apt-get install -y \
-        tree \
-        curl \
-        ca-certificates \
-        postgresql postgresql-contrib
-} &
-spinner || {
+if ! sudo apt-get update && sudo apt-get install -y \
+    tree \
+    curl \
+    ca-certificates \
+    postgresql postgresql-contrib; then
     echo -e "${FAIL}Failed to install dependencies${RSET}"
     exit 1
-}
+fi
 
 # Upgrade to Node.js ${NODE_VERSION}
 echo -e "${VERB}Upgrading to Node.js ${NODE_VERSION}...${RSET}"
-{
-    . ${NVM_DIR}/nvm.sh && nvm install ${NODE_VERSION} && nvm use ${NODE_VERSION}
-} &
-spinner || {
+if ! . ${NVM_DIR}/nvm.sh && nvm install ${NODE_VERSION} && nvm use ${NODE_VERSION}; then
     echo -e "${FAIL}Failed to upgrade Node.js${RSET}"
     exit 1
-}
+fi
 
 # Install @mitre/saf and cinc-auditor using environment variables
 echo -e "${VERB}Installing SAF-CLI and ${CINC_PACKAGE}v${CINC_VERSION}...${RSET}"
-{
-    npm install -g @mitre/saf
-    curl -L https://omnitruck.cinc.sh/install.sh -k | sudo bash -s -- -P ${CINC_PACKAGE} -v ${CINC_VERSION}
-} &
-spinner || {
+if ! npm install -g @mitre/saf || ! curl -L https://omnitruck.cinc.sh/install.sh -k | sudo bash -s -- -P ${CINC_PACKAGE} -v ${CINC_VERSION}; then
     echo -e "${FAIL}Failed to install @mitre/saf-cli or cinc-auditor${RSET}"
     exit 1
-}
+fi
 
 # Set up Docker containers
 echo -e "${VERB}Setting up Docker containers...${RSET}"
-{
-    docker-compose -f /workspace/.devcontainer/docker-compose.yml up -d
-} &
-spinner || {
+if ! docker-compose -f /workspace/.devcontainer/docker-compose.yml up -d; then
     echo -e "${FAIL}Failed to set up Docker containers${RSET}"
     exit 1
-}
+fi
 
 # Verify installations
 echo -e "${VERB}Verifying installations...${RSET}"
-{
-    node -v
-    npm -v
-    saf --version
-    cinc-auditor --version
-    psql --version
-} &
-spinner || {
+if ! node -v || ! npm -v || ! saf --version || ! cinc-auditor --version || ! psql --version; then
     echo -e "${FAIL}One or more installations are not correct${RSET}"
     exit 1
-}
+fi
 
 # Verify Docker containers
 echo -e "${VERB}Verifying Docker containers...${RSET}"
@@ -126,10 +91,7 @@ echo "alias ll='ls -la'" >>~/.bashrc
 
 # Clean up
 echo -e "${VERB}Cleaning up...${RSET}"
-{
-    sudo apt-get clean
-    rm -rf /var/lib/apt/lists/*
-} &
-spinner
+sudo apt-get clean
+rm -rf /var/lib/apt/lists/*
 
 echo -e "${PASS}Post-create setup script completed successfully.${RSET}"
