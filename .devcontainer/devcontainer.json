@@ -1,0 +1,61 @@
+{
+    "name": "SAF Training Lab Environment",
+    "envFile": "${localWorkspaceFolder}/.devcontainer/.env", // specify the path to the .env file in the .devcontainer folder
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".",
+        "args": {
+            "NODE_VERSION": "${localEnv:NODE_VERSION}",
+            "CINC_PACKAGE": "${localEnv:CINC_PACKAGE}",
+            "CINC_VERSION": "${localEnv:CINC_VERSION}"
+        }
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        "source=saf-training-extensions,target=/root/.vscode-server/extensions,type=volume"
+    ],
+    "runArgs": [
+        "--init",
+        "--cap-add=SYS_PTRACE",
+        "--security-opt",
+        "seccomp=unconfined"
+    ],
+    "containerUser": "vscode",
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/ruby:1": {
+            "version": "3.1"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "22"
+        },
+        "ghcr.io/devcontainers/features/git:1": {},
+        // "ghcr.io/devcontainers/features/python:1": {
+        //     "version": "3.9"
+        // },
+        // "ghcr.io/devcontainers/features/terraform:1": {},
+        "ghcr.io/devcontainers/features/azure-cli:1": {},
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
+        // Alternative PostgreSQL feature source
+        // "ghcr.io/devcontainers/features/postgres:1": {
+        //     "version": "13"
+        // }
+    },
+    "overrideCommand": false,
+    "postCreateCommand": "chmod +x ${containerWorkspaceFolder}/.devcontainer/scripts/*.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/post-create-setup.sh && ${containerWorkspaceFolder}/.devcontainer/scripts/update-nvmrc.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "shopify.ruby-lsp",
+                "ms-azuretools.vscode-docker",
+                "esbenp.prettier-vscode",
+                "oderwat.indent-rainbow"
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            }
+        }
+    }
+}

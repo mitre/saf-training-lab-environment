@@ -6,7 +6,6 @@
 #
 # Source this file in other scripts to utilize these variables.
 
-
 # Get the width and height of the current virtual terminal window.
 TERMINAL_ROWS=$(stty size | cut --delimiter=' ' --fields=1)
 TERMINAL_COLS=$(stty size | cut --delimiter=' ' --fields=2)
