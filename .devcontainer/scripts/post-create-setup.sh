@@ -51,7 +51,8 @@ fi
 # Copy extra CA certificates and update CA certificates
 echo -e "${VERB}Copying extra CA certificates and updating CA certificates...${RSET}"
 if [ -f .devcontainer/extra-ca.pem ]; then
-    sudo cp .devcontainer/extra-ca.pem /usr/local/share/ca-certificates/extra-ca.crt
+    sudo mkdir -p /usr/local/share/ca-certificates/extra
+    sudo cp .devcontainer/extra-ca.pem /usr/local/share/ca-certificates/extra/extra-ca.crt
     sudo update-ca-certificates
 else
     echo -e "${WARN}extra-ca.pem not found in .devcontainer directory${RSET}"
