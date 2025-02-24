@@ -3,7 +3,7 @@
     "image": "mcr.microsoft.com/devcontainers/universal:2",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
     "workspaceFolder": "/workspace",
-    "postCreateCommand": "chmod +x /workspace/build-lab.sh && source /workspace/build-lab.sh",
+    "postCreateCommand": "chmod +x /workspace/build-lab.sh && . /workspace/build-lab.sh",
     "customizations": {
         "vscode": {
             "extensions": [

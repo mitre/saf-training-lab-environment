@@ -2,10 +2,10 @@
 
 source ./set-prettyOutputVariables.sh
 
-if [[ ! $0 =~ .*/bash ]]; then
-    echo -e "\n${WARN}You did not run this script by executing${RSET} ${VERB}source $0${RSET} ${WARN}or${RSET} ${VERB}. $0${RSET} ${WARN}Please try again.${RSET}\n"
-    exit 1
-fi
+# if [[ ! $0 =~ .*/bash ]]; then
+#     echo -e "\n${WARN}You did not run this script by executing${RSET} ${VERB}source $0${RSET} ${WARN}or${RSET} ${VERB}. $0${RSET} ${WARN}Please try again.${RSET}\n"
+#     exit 1
+# fi
 
 echo -e "${LINE_ASCII_CONSOLE}\n"
 echo -e "${VERB}Setting up the lab environment...${RSET}"
