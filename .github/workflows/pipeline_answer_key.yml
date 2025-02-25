@@ -5,11 +5,13 @@ on:
   push:
     # trigger this action on any push to main branch
     branches: [ main, pipeline, answer_key ]                
+  pull_request:
+    branches: [ main ]
 
 jobs:
   gold-image:
     name: Gold Image NGINX
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     env:
        # so that we can use InSpec without manually accepting the license
       CHEF_LICENSE: accept  
@@ -28,7 +30,7 @@ jobs:
 
       # checkout the profile, because that's where our profile is!
       - name: PREP - Check out this repository  
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # double-check that we don't have any serious issues in our profile code
       - name: LINT - Run InSpec Check           
